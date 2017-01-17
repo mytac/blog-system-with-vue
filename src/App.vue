@@ -5,7 +5,7 @@
 <template>
   <div id="app">
     <div class="fronter">
-<forest></forest>
+      <forest></forest>
     </div>
     <div class="content"></div>
   </div>
