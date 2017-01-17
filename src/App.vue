@@ -1,25 +1,26 @@
+<style>
+  @import '../static/style/normalize.css';
+</style>
+
 <template>
   <div id="app">
+    <div class="fronter">
+<forest></forest>
+    </div>
+    <div class="content"></div>
   </div>
 </template>
 
-<script>
-
+<script type="text/ecmascript-6">
+import forest from './components/startAnime/forest'
 export default {
-  components: {
+  data(){
+    return {}
+  },
+  components:{
+    'forest':forest
   }
 }
 </script>
 
-<style>
-html {
-  height: 100%;
-}
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-</style>
