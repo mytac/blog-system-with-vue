@@ -1,14 +1,9 @@
 <style scoped>
-.loader{
-width:100%;
-height:100%;
-text-align:center;
-background-color:rgb(255,254,237);
-}
+
 </style>
 <template>
-    <div class="loader">
-        <img src="../../assets/fronter/face.gif">
+    <div>
+        <p>登陆</p>
     </div>
 </template>
 
