@@ -27,6 +27,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /bootstrap\/js\//,
+        loader: 'imports?jQuery=jquery'
+      },
+      {
         test: /\.vue$/,
         loader: 'vue'
       },
