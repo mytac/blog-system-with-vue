@@ -5,4 +5,8 @@ npm-debug.log
 selenium-debug.log
 test/unit/coverage
 test/e2e/reports
+<<<<<<< HEAD
 .idea/
+=======
+.idea/
+>>>>>>> 72ca4f51887abb8d41867480562d51f5f53536ef

@@ -7,6 +7,9 @@
   html,body{
     background-color: rgb(255,254,237);
   }
+  .main-view{
+    margin: 10% auto auto 10%;
+  }
 </style>
 
 <template>
@@ -16,12 +19,12 @@
     </div>
     <div class="content" v-if="!showLoader">
       <Row>
-        <i-col span="24">
-          <Menu theme="light">
-            <Submenu key="1" v-if="loginState">
+        <i-col span="8">
+          <Menu theme="light" :open-keys="['1']" width="auto">
+            <Submenu key="1" v-if="loginState" >
               <template slot="title">
                 <Icon type="ios-paper"></Icon>
-                张君卓
+                请登录
               </template>
               <Menu-item v-link="{ path: '/signin' }" key="1-1">登录</Menu-item>
               <Menu-item v-link="{ path: '/signup' }" key="1-2">注册</Menu-item>
@@ -35,9 +38,16 @@
           </Menu>
 
         </i-col>
+        <i-col span="12">
+          <div class="main-view">
+            <router-view></router-view>
+          </div>
+        </i-col>
+        <i-col span="4">
+        </i-col>
       </Row>
       <br>
-    <router-view></router-view>
+
 
     </div>
   </div>
