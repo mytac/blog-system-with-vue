@@ -3,22 +3,38 @@
 </style>
 
 <template>
-    <div>
-      <Rows>
-        <i-col span="3">space</i-col>
-        <i-col span="12">main</i-col>
-        <i-col span="6">guiders</i-col>
-        <i-col span="3">space</i-col>
-      </Rows>
-    </div>
+  <div>
+    <Row>
+      <i-col span="16">
+        <Row>
+          <pic-rotation></pic-rotation>
+        </Row>
+        <Row>
+          <blog-type></blog-type>
+        </Row>
+        <Row>
+          <recommend-blog></recommend-blog>
+        </Row>
+      </i-col>
+      <i-col span="8">
+
+      </i-col>
+    </Row>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
-    export default{
-        data(){
-            return{
-
-            }
-        }
+  import picRotation from "./picRotation.vue"
+  import blogType from "./blogType.vue"
+  import recommendBlog from "./recommendBlog.vue"
+  export default{
+    data(){
+      return {}
+    },
+    components: {
+      'pic-rotation': picRotation,
+      'blog-type': blogType,
+      'recommend-blog':recommendBlog
     }
+  }
 </script>

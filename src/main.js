@@ -21,11 +21,11 @@ var router=new VueRouter()
 
 //路由
 router.map({
-  '/signin': {
-    component: signin
-  },
   '/': {
     component: index
+  },
+  '/signin': {
+    component: signin
   },
   '/signup': {
     component: signup
