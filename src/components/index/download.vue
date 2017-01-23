@@ -1,10 +1,19 @@
 <style scoped>
-
+.download{
+  width:90%;
+  height:140px;
+  line-height:140px;
+  background-color:rgba(10,25,12,0.2);
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+  float:right;
+}
 </style>
 
 <template>
-    <div>
-      download
+    <div class="download">
+      <span>下载客户端</span>
     </div>
 </template>
 

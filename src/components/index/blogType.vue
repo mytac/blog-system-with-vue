@@ -125,7 +125,6 @@
     methods:{
       handleResize (event) {
         this.screenWidth = document.body.clientHeight
-        console.log(this.screenWidth)
         this.resizeType()
       },
       resizeType(){ // 当窗口大小小于1080时,type只显示4个
