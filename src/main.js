@@ -6,6 +6,9 @@ import 'iview/dist/styles/iview.css';
 import signin from './components/sign/signin'
 import signup from './components/sign/signup'
 import index from './components/index/index'
+import attention from './components/attention/attention.vue'
+
+import mainview from'./components/attention/mainview.vue'
 
 var VueRouter = require('vue-router')
 
@@ -29,6 +32,21 @@ router.map({
   },
   '/signup': {
     component: signup
+  },
+  '/attention':{
+    component:attention
+/*    subRoutes:{
+      '/':{
+        component:{
+          template:'<p>dsad</p>'
+        }
+      },
+      '/atten':{
+        component:{
+          template:'<h3>fhdif</h3>'
+        }
+      }
+    }*/
   }
 })
 router.start(App,'#app')
