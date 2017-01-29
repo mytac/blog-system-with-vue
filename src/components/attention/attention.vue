@@ -25,35 +25,39 @@ td.title{
     height:40px;
     background-color:red;
 }
+
+
 </style>
 <template>
     <div>
         <Row>
             <i-col span="6">
                 <Menu :theme="light" width="auto">
-                    <Menu-group title="关注内容" >
-                            <Menu-item  :key="$index+1" v-for="m in menu">
-                                <div class="menu">
-                                    <div class="img-wrapper">
-                                        <table>
-                                            <tr>
-                                                <td class="img"> <img :src="m.imgUrl" class="attention-avatar"></td>
-                                                <td  class="title"><span>{{m.title}}</span></td>
-                                                <td  class="active-num">
-                                                    <!--关注的人的动态数-->
-                                                    <span>{{m.activeNum}}</span>
-                                                </td>
-                                            </tr>
-                                        </table>
+                    <Menu-group title="关注内容">
+                        <Menu-item :key="$index+1" v-for="m in menu"
+                                   @click="changeColumn($index)"
+                                   v-link="{name:'attention',params:{switchname:switchname}}">
+                            <div class="menu">
+                                <div class="img-wrapper">
+                                    <table>
+                                        <tr>
+                                            <td class="img"><img :src="m.imgUrl" class="attention-avatar"></td>
+                                            <td class="title"><span>{{m.title}}</span></td>
+                                            <td class="active-num">
+                                                <!--关注的人的动态数-->
+                                                <span>{{m.activeNum}}</span>
+                                            </td>
+                                        </tr>
+                                    </table>
 
-                                    </div>
                                 </div>
-                            </Menu-item>
+                            </div>
+                        </Menu-item>
                     </Menu-group>
                 </Menu>
             </i-col>
             <i-col span="18">
-                <main-view></main-view>
+                <router-view></router-view>
             </i-col>
         </Row>
     </div>
@@ -64,15 +68,22 @@ td.title{
     export default{
         data () {
             return {
-                menu:[
-                    {imgUrl:require('./orange.png'),title:'韩寒',activeNum:'3'},
-                    {imgUrl:require('./orange.png'),title:'韩寒',activeNum:'3'},
-                    {imgUrl:require('./orange.png'),title:'韩寒',activeNum:'3'},
-                ]
+                menu: [
+                    {imgUrl: require('./orange.png'), title: '韩寒0', activeNum: '3', id: 1},
+                    {imgUrl: require('./orange.png'), title: '韩寒1', activeNum: '3', id: 3},
+                    {imgUrl: require('./orange.png'), title: '韩寒2', activeNum: '3', id: 6},
+                ],
+                ColumnId: 1,//专栏id,
+                switchname:''
             }
         },
-        components:{
-            'main-view':mainview
+        methods: {
+            changeColumn(index){
+                this.switchname=this.menu[index]['id']
+            }
+        },
+        components: {
+            'main-view': mainview
         }
     }
 </script>

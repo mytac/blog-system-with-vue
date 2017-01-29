@@ -34,19 +34,16 @@ router.map({
     component: signup
   },
   '/attention':{
-    component:attention
-/*    subRoutes:{
+    component:attention,
+    subRoutes:{
       '/':{
-        component:{
-          template:'<p>dsad</p>'
-        }
+        component:mainview
       },
-      '/atten':{
-        component:{
-          template:'<h3>fhdif</h3>'
-        }
+      '/attention/:switchname':{
+        name:'attention',
+        component:mainview
       }
-    }*/
+    }
   }
 })
 router.start(App,'#app')
