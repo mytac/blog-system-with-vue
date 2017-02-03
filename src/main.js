@@ -9,6 +9,10 @@ import index from './components/index/index'
 import attention from './components/attention/attention.vue'
 
 import mainview from'./components/attention/mainview.vue'
+import atten_hot from './components/attention/sub_hot.vue'
+import atten_new from './components/attention/sub_new.vue'
+
+import blogs from './components/index/recommendBlog.vue'
 
 var VueRouter = require('vue-router')
 
@@ -41,7 +45,16 @@ router.map({
       },
       '/attention/:switchname':{
         name:'attention',
-        component:mainview
+        component:mainview,
+        subRoutes:{
+          '/':{
+            component:blogs
+          },
+          '/:choseType':{ //hot
+            name:'blogsType',
+            component:blogs
+          }
+        }
       }
     }
   }
