@@ -36,7 +36,7 @@
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention' }" key="2">
+            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" key="2">
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>

@@ -43,7 +43,7 @@ router.map({
       '/':{
         component:mainview
       },
-      '/attention/:switchname':{
+      '/:switchname':{
         name:'attention',
         component:mainview,
         subRoutes:{
