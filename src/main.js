@@ -18,7 +18,7 @@ var VueRouter = require('vue-router')
 
 
 Vue.use(VueRouter)
-Vue.use(iView);
+Vue.use(iView)
 new Vue({
   el: 'body',
   components: { App }
@@ -41,7 +41,16 @@ router.map({
     component:attention,
     subRoutes:{
       '/':{
-        component:mainview
+        component:mainview,
+        subRoutes:{
+          '/':{
+            component:blogs
+          },
+          '/:choseType':{ //hot
+            name:'blogsType',
+            component:blogs
+          }
+        }
       },
       '/:switchname':{
         name:'attention',

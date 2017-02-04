@@ -11,7 +11,7 @@
             <!--<div class="content">{{$route.params.switchname}}</div>-->
            <!-- <div class="content">{{columnId}}</div>-->
             <div class="buttons" @click="test($route.params)">
-              {{params.switchname}}
+              {{$route.params.switchname}}
             </div>
         </div>
         <div class="blog">
@@ -53,9 +53,9 @@
       },
         ready(){
             let _self=this
-            this.$nextTick(function(){
+            /*this.$nextTick(function(){
                this.params=this.$route.params
-            })
+            })*/
 
         },
 
