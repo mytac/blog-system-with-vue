@@ -38,7 +38,7 @@
             </Menu-item>
             <Menu-item key="3" v-link="{ path: '/attention/1/2' }" key="2">
               <Icon type="pinpoint"></Icon>
-              发现
+              关注
             </Menu-item>
             <Menu-item key="3">
               <!--<i-button v-link="{ path: '/signup' }" type="default" size="large">注册</i-button>-->

@@ -37,6 +37,7 @@ td.title{
                         <Menu-item :key="$index+1" v-for="m in menu"
                                    @click="changeColumn($index)"
                                    v-link="{name:'attention',params:{switchname:switchname}}">
+                          <!--上面那行对应的是关注的人的id-->
                             <div class="menu">
                                 <div class="img-wrapper">
                                     <table>

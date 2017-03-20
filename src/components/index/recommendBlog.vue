@@ -3,6 +3,9 @@
     margin-top: 3%;
     border-bottom:2px solid #f0f0f0;
   }
+  .blog:first-child{
+    margin-top:0;
+  }
   .topbar{
     width: 463px;
     padding-right: 10px;

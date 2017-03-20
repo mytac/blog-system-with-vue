@@ -24,8 +24,10 @@
 </style>
 
 <template>
-  <div v-for="c in categories" class="basic" :class="c.klass">
-    <span>{{c.text}}</span>
+  <div>
+    <div class="basic purple" @click="showNoticeList">
+      <span>显示通知</span>
+    </div>
   </div>
 </template>
 
@@ -33,13 +35,28 @@
   export default{
     data(){
       return {
-        categories:[
-          {klass:'purple',text:'new'},
-          {klass:'orange',text:'new'},
-          {klass:'purple',text:'new'}
-        ]
+        noticeList:[
+        {title:'1',desc:'111111',type:'info',duration:2},
+        {title:'1',desc:'111111',type:'warning',duration:2},
+        {title:'1',desc:'111111',type:'open',duration:0},
+        {title:'1',desc:'111111',type:'error',duration:0},
+      ]
       }
     },
-    components: {}
+    methods:{
+      noticeWindow(title,desc,type,duration){
+          if(!duration){duration=0} //duration==0时，通知栏不自动消失
+        let str='this.$Notice.'+type+'({title: title,desc: desc,duration: duration});'
+        eval(str)
+      },
+      showNoticeList(){
+          let arr=this.noticeList
+          let _self=this
+          arr.forEach(function(a){
+            _self.noticeWindow(a.title,a.desc,a.type,a.duration)
+          })
+
+      }
+    }
   }
 </script>
