@@ -25,8 +25,11 @@
 
 <template>
   <div>
-    <div class="basic purple" @click="showNoticeList">
+    <div class="basic purple" @click="showNoticeList" v-if="isShowList">
       <span>显示通知</span>
+    </div>
+    <div class="basic orange" @click="openNoticeList" v-if="!isShowList">
+      <span>关闭通知</span>
     </div>
   </div>
 </template>
@@ -36,11 +39,12 @@
     data(){
       return {
         noticeList:[
-        {title:'1',desc:'111111',type:'info',duration:2},
-        {title:'1',desc:'111111',type:'warning',duration:2},
-        {title:'1',desc:'111111',type:'open',duration:0},
-        {title:'1',desc:'111111',type:'error',duration:0},
-      ]
+        {title:'1',desc:'111111',type:0},
+        {title:'1',desc:'111111',type:0},
+        {title:'1',desc:'111111',type:1},
+        {title:'1',desc:'111111',type:2},
+      ],
+        isShowList:true
       }
     },
     methods:{
@@ -50,12 +54,21 @@
         eval(str)
       },
       showNoticeList(){
-          let arr=this.noticeList
-          let _self=this
-          arr.forEach(function(a){
+        this.isShowList=false
+        let _self=this
+        const typeList=['open','success','error']
+          this.noticeList.forEach(function(a){
+              if(!isNaN(a.type)){
+                let typeCode=a.type
+                a.type=typeList[typeCode]
+              }
             _self.noticeWindow(a.title,a.desc,a.type,a.duration)
           })
 
+      },
+      openNoticeList(){
+          this.$Notice.destroy()
+          this.isShowList=true
       }
     }
   }
