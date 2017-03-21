@@ -36,12 +36,13 @@
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" key="2">
+            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" key="2" v-if="!loginState">
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
-            <Menu-item key="3">
-              <!--<i-button v-link="{ path: '/signup' }" type="default" size="large">注册</i-button>-->
+            <Menu-item key="4" v-if="!loginState" key="3" v-link="{path:'/edit'}">
+              <Icon type="edit"></Icon>
+              写日志
             </Menu-item>
           </Menu>
         </i-col>
@@ -70,7 +71,7 @@
     data(){
       return {
         /*status*/
-        loginState: true,
+        loginState: false,
         showLoader: true
       }
     },
@@ -87,7 +88,7 @@
       this.checkSignIn()
     },
     compiled(){
-      var _self = this
+      let _self = this
       setTimeout(function () {
         _self.showLoader = false
       }, 1000)

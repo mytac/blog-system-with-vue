@@ -7,6 +7,8 @@ import signin from './components/sign/signin'
 import signup from './components/sign/signup'
 import index from './components/index/index'
 import attention from './components/attention/attention.vue'
+import edit from './components/edit/edit.vue'
+
 
 import mainview from'./components/attention/mainview.vue'
 import atten_hot from './components/attention/sub_hot.vue'
@@ -66,6 +68,14 @@ router.map({
         }
       }
     }
+  },
+  '/edit':{
+      name:'edit',
+      component:edit
+  },
+  '/add':{
+    name:'add',
+    component:edit
   }
 })
 router.start(App,'#app')

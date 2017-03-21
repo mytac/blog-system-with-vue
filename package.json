@@ -12,9 +12,17 @@
   "dependencies": {
     "babel-runtime": "^6.0.0",
     "bootstrap-webpack": "0.0.5",
+    "exports": "0.0.1",
+    "exports-loader": "^0.6.4",
+    "imports-loader": "^0.7.1",
     "iview": "^0.9.16",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.0",
+    "style-loader": "^0.15.0",
     "vue": "^1.0.21",
-    "vue-router": "^0.7.13"
+    "vue-router": "^0.7.13",
+    "vue-simplemde": "^0.3.7",
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
@@ -23,6 +31,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "babel-register": "^6.0.0",
+    "bootstrap": "^3.3.7",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.0",
     "eventsource-polyfill": "^0.9.6",
@@ -36,8 +45,10 @@
     "ora": "^0.2.0",
     "shelljs": "^0.6.0",
     "url-loader": "^0.5.7",
+    "vue": "^1.0.26",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
+    "vue-html5-editor": "^1.0.2",
     "vue-loader": "^8.3.0",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.2",
