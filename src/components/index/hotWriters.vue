@@ -50,7 +50,7 @@
               <span>收获{{w.likeNum}}喜欢</span>
             </div>
             <div class="follow">
-              <i-button type="success" size="small" @click="follow($index)">+关注</i-button>
+              <i-button type="success" size="small" @click="follow(w.id)">+关注</i-button>
             </div>
           </div>
         </div>
@@ -64,15 +64,26 @@
         data(){
             return{
               writers:[
-                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52'},
-                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52'},
-                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52'}
+                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52',id:1},
+                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52',id:2},
+                {avatarUrl:require("./hotWriters/orange.png"),title:'asdasda',followNum:'20',likeNum:'52',id:3}
               ]
             }
         },
       methods:{
-        follow(index){
-          console.log(index)
+        follow(id){
+          const alertMsg=[
+              {status:'error',text:'服务器不想和你说话，并抛出一个异常'},
+              {status:'success',text:'操作成功'}
+          ]
+          let statusCode=0 //temp
+          console.log(id)
+          //ajax here..
+          // return for **[statusCode]**
+
+
+          let str="this.$Message."+alertMsg[statusCode].status+"('"+alertMsg[statusCode].text+"')"
+          eval(str)
         }
       }
     }
