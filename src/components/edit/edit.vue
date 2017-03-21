@@ -1,12 +1,17 @@
 <style></style>
 <template>
   <div>
-    <i-form :model="formItem" :label-width="80">
-      <Form-item label="文章标题">
-        <i-input :value.sync="formItem.input" placeholder="请输入"></i-input>
+    <i-form v-ref:form-inline :model="formItem" :rules="ruleInline" inline>
+      <Form-item prop="user">
+        <i-input type="text" :value.sync="formItem.input" placeholder="输入标题名">
+          <Icon type="document-text" slot="prepend"></Icon>
+        </i-input>
       </Form-item>
-      <markdown-editor :value.sync="content" v-ref:markdown-editor></markdown-editor>
+      <Form-item>
+        <i-button type="primary" @click="save">保存并上传</i-button>
+      </Form-item>
     </i-form>
+    <markdown-editor :value.sync="content" v-ref:markdown-editor></markdown-editor>
 
   </div>
 </template>
@@ -39,14 +44,25 @@
               if(val==this.temp){
                   this.autoSave(val)
               }
-          },5000)
+          },2500)
         }
     },
     methods:{
-        autoSave(content){
-            //ajax here...
+        autoSave(content){ //localstorage
             console.log(content)
-        }
+            this.$Message.success('您当前的文本已经保存');
+        },
+      save(){ //db
+            let content=this.content
+            //校验
+            if(this.formItem.input.trim()==''||content.trim()==''){
+                this.$Message.warning('请输入内容')
+              return;
+            }
+            const l =this.$Message.loading('正在保存中...', 0);
+            setTimeout(l, 3000);
+
+      }
     }
   }
 </script>
