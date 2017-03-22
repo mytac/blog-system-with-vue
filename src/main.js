@@ -8,7 +8,7 @@ import signup from './components/sign/signup'
 import index from './components/index/index'
 import attention from './components/attention/attention.vue'
 import edit from './components/edit/edit.vue'
-
+import articles from './components/articles/articles.vue'
 
 import mainview from'./components/attention/mainview.vue'
 import atten_hot from './components/attention/sub_hot.vue'
@@ -76,6 +76,10 @@ router.map({
   '/add':{
     name:'add',
     component:edit
+  },
+  '/articles':{
+    name:'articles',
+    component:articles
   }
 })
 router.start(App,'#app')

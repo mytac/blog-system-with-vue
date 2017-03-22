@@ -1,6 +1,9 @@
 <style scoped>
+  .main>div{float:left;}
+  .articles{
+    width:68%;
+  }
   ul.article-list{
-    width:70%;
     padding-top:20px;
   }
 .blog{
@@ -51,54 +54,89 @@
   .like-num{
     font-size:10px;
   }
+  .page{
+    padding-top:30px;
+  }
+  .follow{
+    width:30%;
+    margin-left:2%;
+  }
 </style>
 <template>
-  <div>
-    <h2>文章列表</h2>
-    <ul class="article-list">
-      <li v-for="a in articles">
-        <div class="blog">
-          <div class="top-bar">
-            <h4>
-              <span class="title">{{a.title}}</span>
-            </h4>
+  <div class="main">
+    <div class="articles">
+      <h2>文章列表</h2>
+      <ul class="article-list">
+        <li v-for="a in articles">
+          <div class="blog" @click="goDetail(a.id)">
+            <div class="top-bar">
+              <h4>
+                <span class="title">{{a.title}}</span>
+              </h4>
+            </div>
+            <div class="short-cut">
+              <p>{{a.shortCut}}</p>
+            </div>
+            <div class="tools">
+              <span class="date">2017-3-22</span>
+              <span class="heart"><Icon type="heart"></Icon><span class="like-num">{{a.likeNum}}</span></span>
+              <span><Icon type="compose" ></Icon></span>
+              <span><Icon type="trash-a"></Icon></span>
+            </div>
           </div>
-          <div class="short-cut">
-            <p>{{a.shortCut}}</p>
-          </div>
-          <div class="tools">
-            <span class="date">2017-3-22</span>
-            <span class="heart"><Icon type="heart"></Icon><span class="like-num">{{a.likeNum}}</span></span>
-            <span><Icon type="compose" ></Icon></span>
-            <span><Icon type="trash-a"></Icon></span>
-          </div>
-        </div>
-      </li>
-    </ul>
-    <Page :total="100"></Page>
+        </li>
+      </ul>
+      <div class="page">
+        <Page :total="100"></Page>
+      </div>
+
+    </div>
+    <div class="follow">
+      <Card>
+        <p slot="title">文章分类</p>
+        <p v-for="c in categories">
+          <a href="">{{c.title}}</a>
+        </p>
+      </Card>
+    </div>
   </div>
+
 </template>
 <script type="text/ecmascript-6">
-
+import hotWriters from '../index/hotWriters.vue'
   export default{
       data(){
           return({
-            articles:[]
+            articles:[],
+            categories:[]
           })
       },
     components:{
-
+          'hot-writers':hotWriters
+    },
+    methods:{
+      goDetail(id){
+          //$route.go('')
+      }
     },
     ready(){
           //ajax here
           let mockData=[
-            {title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
-            {title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
-            {title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
-            {title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
-            {title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20}
+            {id:1,title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+            {id:5,title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+            {id:4,title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+            {id:3,title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+            {id:2,title:'外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',shortCut:'中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20}
           ]
+      let categories=[
+        {cid:1,title:'分类1'},
+        {cid:1,title:'分类2'},
+        {cid:1,title:'分类3'},
+        {cid:1,title:'分类4'},
+        {cid:1,title:'分类5'}
+      ]
       this.articles=mockData
+      this.categories=categories
     }
   }
 </script>
