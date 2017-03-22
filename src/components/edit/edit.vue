@@ -33,7 +33,8 @@
             formItem:{
               input:''
             },
-            temp:''
+            temp:'',
+            selfSave:false  //用户主动保存的标识符
           }
         )
     },
@@ -49,8 +50,9 @@
     },
     methods:{
         autoSave(content){ //localstorage
-            console.log(content)
-            this.$Message.success('您当前的文本已经保存');
+          localStorage.setItem("content",content)
+          console.log(content)
+          this.$Message.success('您当前的文本已经保存');
         },
       save(){ //db
             let content=this.content
@@ -59,9 +61,23 @@
                 this.$Message.warning('请输入内容')
               return;
             }
+            //ajax here...
+            //edit/saveContent
             const l =this.$Message.loading('正在保存中...', 0);
+            this.selfSave=true
             setTimeout(l, 3000);
 
+      }
+    },
+    detached(){
+        console.log('detached')
+      console.log(this.content)
+        if(this.content!=''){ //有内容文本并且没有自主保存
+
+        this.$Message.warning('您的文本已被保存至您的临时文章列表中，如不需要请您自行删除')
+        //从localstorage中取出，并存到服务器中
+        //ajax here...
+        //edit/leaveAutoSave
       }
     }
   }
