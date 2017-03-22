@@ -71,9 +71,8 @@
     },
     detached(){
         console.log('detached')
-      console.log(this.content)
-        if(this.content!=''){ //有内容文本并且没有自主保存
-
+        if(this.content!='' && this.selfSave==false){ //有内容文本并且没有自主保存
+          console.log(this.content)
         this.$Message.warning('您的文本已被保存至您的临时文章列表中，如不需要请您自行删除')
         //从localstorage中取出，并存到服务器中
         //ajax here...

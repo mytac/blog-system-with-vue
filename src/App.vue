@@ -36,13 +36,17 @@
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" key="2" v-if="!loginState">
+            <Menu-item key="3" v-link="{ path: '/attention/1/2' }"v-if="!loginState">
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
-            <Menu-item key="4" v-if="!loginState" key="3" v-link="{path:'/edit'}">
+            <Menu-item key="4" v-if="!loginState" v-link="{path:'/edit'}">
               <Icon type="edit"></Icon>
               写日志
+            </Menu-item>
+            <Menu-item key="5" v-if="!loginState"v-link="{path:'/articles'}">
+              <Icon type="ios-book"></Icon>
+              我的文章
             </Menu-item>
           </Menu>
         </i-col>
