@@ -63,8 +63,8 @@ import comment from './comment.vue'
     },
     methods: {
       likeIt(){
-        if(this.article.userid==this.$route.params.userId){
-            this.$Message.warining('亲爱的，不可以给自己点赞呦~~~')
+        if(this.article.userId==this.$route.params.userId){
+            this.$Message.warning('亲爱的，不可以给自己点赞呦~~~')
           return;
         }
         let id = this.article.likeNum
@@ -76,11 +76,11 @@ import comment from './comment.vue'
         //ajax here...
         //article/comments
         let comments=[
-          {userid:'1',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'1',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'1',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'1',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'1',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'}
+          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
+          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
+          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
+          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
+          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'}
         ]
         this.comments=comments
         this.showComment=!this.showComment
@@ -96,7 +96,7 @@ import comment from './comment.vue'
       let article = { //temp
         content: 'Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it.',
         title: '按时发放水电费',
-        userId: '康华大厦',
+        userId: '12345',
         likeNum: 20,
         createDate: '2013-56-12'
       }
