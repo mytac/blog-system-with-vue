@@ -1,0 +1,12 @@
+用户操作日志表
+字段
+userId textId
+
+
+通知表
+字段：
+id 用户id type（普通通知0/投稿成功1/投稿失败2） desc（文本描述） status（已读/未读）
+
+文章表
+字段
+id userid status(1发表/0草稿) title（文章标题）content likeNum createDate
