@@ -63,6 +63,10 @@ import comment from './comment.vue'
     },
     methods: {
       likeIt(){
+        if(this.article.userid==this.$route.params.userId){
+            this.$Message.warining('亲爱的，不可以给自己点赞呦~~~')
+          return;
+        }
         let id = this.article.likeNum
         //ajax here...
         //article/likeIt

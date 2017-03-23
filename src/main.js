@@ -84,7 +84,7 @@ router.map({
     name:'articles',
     component:articles
   },
-  'detail/:articleId':{
+  'detail/:userId/:articleId':{
     name:'detail',
     component:detail
   }
