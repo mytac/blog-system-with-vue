@@ -36,15 +36,15 @@
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention/1/2' }"v-if="isLogin">
+            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" v-if="isLogin">
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
-            <Menu-item key="4" v-if="isLogin" v-link="{path:'/edit'}">
+            <Menu-item key="4" v-if="isLogin" @click="goto('edit',['userId'])">
               <Icon type="edit"></Icon>
               写日志
             </Menu-item>
-            <Menu-item key="5" v-if="isLogin"v-link="{path:'/articles'}">
+            <Menu-item key="5" v-if="isLogin" @click="goto('articles',['userId'])">
               <Icon type="ios-book"></Icon>
               我的文章
             </Menu-item>
@@ -87,7 +87,6 @@
           params.forEach((a)=>{
               newParams[a]=_self[a]
           })
-        console.log(newParams)
           this.$router.go({name:name,params:newParams})
       }
     },

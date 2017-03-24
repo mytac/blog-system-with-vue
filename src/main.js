@@ -76,7 +76,7 @@ router.map({
       }
     }
   },
-  '/edit':{
+  '/edit/:userId':{
       name:'edit',
       component:edit
   },
@@ -84,7 +84,7 @@ router.map({
     name:'add',
     component:edit
   },
-  '/articles':{
+  '/articles/:userId':{
     name:'articles',
     component:articles
   },

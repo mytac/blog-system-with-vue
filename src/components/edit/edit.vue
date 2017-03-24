@@ -84,7 +84,7 @@
       }
     },
     ready(){
-        let userid='ssdsad'//temp
+        let userid=this.$route.params.userId//temp
         //ajax here
         //edit/fetchCategoryList
         let categories=[

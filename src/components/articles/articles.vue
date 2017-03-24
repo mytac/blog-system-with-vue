@@ -121,7 +121,7 @@ import hotWriters from '../index/hotWriters.vue'
     methods:{
       goDetail(id){
           console.log('go')
-          let userid='12345'//temp
+          let userid=this.$route.userId//temp
           let articleId='34567' //temp
         this.$router.go({ name: 'detail', params: { userId: userid,articleId:articleId }})
       }
