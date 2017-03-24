@@ -24,7 +24,7 @@
       <Row>
         <i-col span="24">
           <Menu theme="light" :open-keys="['1']" width="auto" mode="horizontal">
-            <Submenu key="1" v-if="loginState">
+            <Submenu key="1" v-if="!isLogin">
               <template slot="title">
                 <Icon type="ios-paper"></Icon>
                 请登录
@@ -32,19 +32,19 @@
               <Menu-item v-link="{ path: '/signin' }" key="1-1">登录</Menu-item>
               <Menu-item v-link="{ path: '/signup' }" key="1-2">注册</Menu-item>
             </Submenu>
-            <Menu-item key="2" v-link="{ path: '/' }" key="2">
+            <Menu-item key="2" @click="goto('index',['userId'])" key="2">
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention/1/2' }"v-if="!loginState">
+            <Menu-item key="3" v-link="{ path: '/attention/1/2' }"v-if="isLogin">
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
-            <Menu-item key="4" v-if="!loginState" v-link="{path:'/edit'}">
+            <Menu-item key="4" v-if="isLogin" v-link="{path:'/edit'}">
               <Icon type="edit"></Icon>
               写日志
             </Menu-item>
-            <Menu-item key="5" v-if="!loginState"v-link="{path:'/articles'}">
+            <Menu-item key="5" v-if="isLogin"v-link="{path:'/articles'}">
               <Icon type="ios-book"></Icon>
               我的文章
             </Menu-item>
@@ -75,21 +75,32 @@
     data(){
       return {
         /*status*/
-        loginState: false,
-        showLoader: true
+        isLogin: false,
+        showLoader: true,
+        userId:''
       }
+    },
+    methods:{
+      goto(name,params){
+          let _self=this
+          let newParams={}
+          params.forEach((a)=>{
+              newParams[a]=_self[a]
+          })
+        console.log(newParams)
+          this.$router.go({name:name,params:newParams})
+      }
+    },
+    events:{
+        'isLogin':function(isLogin){
+              this.isLogin=isLogin
+        },
+        'userId':function(userId){
+          this.userId=userId
+        }
     },
     components: {
       'loader': loader
-    },
-    methods: {
-      checkSignIn(){ //检查登录状态
-        //this.loginState=true
-      }
-    },
-    created(){
-      //检查登录状态
-      this.checkSignIn()
     },
     compiled(){
       let _self = this
@@ -98,6 +109,7 @@
       }, 1000)
 
     }
+
   }
 </script>
 

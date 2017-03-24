@@ -46,6 +46,13 @@
       'read-category':readCategory,
       'download':download,
       'hot-writers':hotWriters
+    },
+    attached(){
+        if(this.$route.params.userId){
+          this.$dispatch('userId',this.$route.params.userId)
+        }
+
+
     }
   }
 </script>

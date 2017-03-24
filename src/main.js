@@ -33,7 +33,11 @@ var router=new VueRouter()
 
 //路由
 router.map({
-  '/': {
+  '/':{
+    component:index
+  },
+  '/:userId': {
+    name:'index',
     component: index
   },
   '/signin': {

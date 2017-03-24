@@ -45,9 +45,16 @@
     },
     methods: {
       handleSubmit(name) {
+          let userId=this.formInline.user
+
         this.$refs[name].validate((valid) => {
-          if (valid) {
+            //ajax here
+            //sign/checkLogin
+          let status=1 //temp
+          if (valid&&status==1) {
             this.$Message.success('提交成功!');
+            this.$dispatch('isLogin',true)
+            this.$router.go({name:'index',params:{userId:userId}})
           } else {
             this.$Message.error('表单验证失败!');
           }
