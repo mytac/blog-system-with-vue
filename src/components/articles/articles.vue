@@ -96,7 +96,7 @@
       <Card>
         <p slot="title">文章分类</p>
         <p v-for="c in categories">
-          <a href="">{{c.title}}</a>
+          <a @click="queryByCategory(c.cid)">{{c.title}}</a>
         </p>
       </Card>
     </div>
@@ -124,6 +124,19 @@ import hotWriters from '../index/hotWriters.vue'
           let userid=this.$route.userId//temp
           let articleId='34567' //temp
         this.$router.go({ name: 'detail', params: { userId: userid,articleId:articleId }})
+      },
+      queryByCategory(cid){
+          //ajax here...
+        //articles/queryByCategory
+        console.log(222)
+        let mockData= [
+              {id:1,title:'中国足球 shit！！！',shortCut:'2222222222222222222222222222222222国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+              {id:6,title:'中国足球 shit！！！',shortCut:'2222222222222222222222222222222222国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+              {id:4,title:'中国足球 shit！！！',shortCut:'2222222222222222222222222222222222国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+              {id:3,title:'中国足球 shit！！！',shortCut:'2222222222222222222222222222222222国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20},
+              {id:2,title:'中国足球 shit！！！',shortCut:'2222222222222222222222222222222222国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。' ,likeNum:20}
+          ]
+        this.articles=mockData
       }
     },
     ready(){
