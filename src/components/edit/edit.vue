@@ -1,23 +1,28 @@
-<style></style>
+<style scoped>
+  div.form{
+    width:50%;
+    float:left;
+  }
+  div.md-editor{
+    margin-top:20px;
+  }
+</style>
 <template>
   <div>
-    <i-form v-ref:form-inline :model="formItem" :rules="ruleInline" inline>
-      <Form-item prop="user">
-        <i-input type="text" :value.sync="formItem.input" placeholder="输入标题名">
-          <Icon type="document-text" slot="prepend"></Icon>
-        </i-input>
+    <div class="form">
+      <i-input type="text" :value.sync="formItem.input" placeholder="输入标题名">
+        <Icon type="document-text" slot="prepend"></Icon>
+      </i-input>
+    </div>
+      <i-select :model.sync="choseCategory" style="width:200px">
+        <i-option v-for="c in categories" :value="c.id">{{c.text}}</i-option>
+      </i-select>
+      <i-button type="primary" @click="save">保存并上传</i-button>
 
-      </Form-item>
-      <Form-item>
-        <i-select :model.sync="choseCategory" style="width:200px">
-          <i-option v-for="c in categories" :value="c.id">{{c.text}}</i-option>
-        </i-select>
-      </Form-item>
-      <Form-item>
-        <i-button type="primary" @click="save">保存并上传</i-button>
-      </Form-item>
-    </i-form>
-    <markdown-editor :value.sync="content" v-ref:markdown-editor></markdown-editor>
+<div class="md-editor">
+  <markdown-editor :value.sync="content" v-ref:markdown-editor></markdown-editor>
+</div>
+
 
   </div>
 </template>
@@ -25,9 +30,7 @@
   import { markdownEditor } from 'vue-simplemde'
 
   export default {
-    components: {
-      markdownEditor
-    },
+
     data(){
         return(
           {
@@ -37,12 +40,16 @@
             },
             timeOut:0,
             formItem:{
-              input:''
+              input:'',
+              category:''
             },
             temp:'',
             selfSave:false  //用户主动保存的标识符
           }
         )
+    },
+    components: {
+      markdownEditor
     },
     watch:{
         'content':function(val,oldVal){
@@ -63,6 +70,7 @@
       save(){
             let content=this.content
             //校验
+        console.log(this.formItem.input.trim())
             if(this.formItem.input.trim()==''||content.trim()==''||this.choseCategory==''){
                 this.$Message.warning('请输入内容')
               return;
@@ -81,9 +89,9 @@
         //edit/fetchCategoryList
         let categories=[
           {id:12,text:'分类一'},
-          {id:12,text:'分类一'},
-          {id:12,text:'分类一'},
-          {id:12,text:'分类一'}
+          {id:13,text:'分类2'},
+          {id:14,text:'分类3'},
+          {id:15,text:'分类4'}
         ]
       this.categories=categories
     },
