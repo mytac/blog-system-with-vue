@@ -24,9 +24,13 @@ res: categories:[{id,text}]
 req:
 userId,itemNum,currentId,totalNum,
 res:
+items:[textId,createDate,likeNum,shortCut,title] 按时间顺序排
+
+2)按类型查
+articles/queryByCategory
+req:userId cid
+res:
 items:[textId,createDate,likeNum,shortCut,title]
-
-
 
 
 3.文章详情页(展示)
@@ -45,3 +49,10 @@ null
 req:textid
 res:
 items:[{userId,createDate,content,username}]
+
+
+4.登陆/注册页
+1)登陆检查
+sign/checkLogin
+req:userid password
+res:status

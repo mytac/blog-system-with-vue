@@ -1,3 +1,7 @@
+用户登录表
+字段：
+userid username password nickname
+
 通知表
 字段：
 id 用户id type（普通通知0/投稿成功1/投稿失败2） desc（文本描述） status（已读/未读）
