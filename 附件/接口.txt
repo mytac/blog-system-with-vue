@@ -1,15 +1,22 @@
 1.编辑页
-1)edit/saveContent
+1)保存
+edit/saveContent
 请求参数
 userid,content,title
 回调参数
 status
 
-2)edit/leaveAutoSave
+2)自动保存
+edit/leaveAutoSave
 请求参数
 userid,content
 回调参数
 status
+
+3)拿用户分类列表
+edit/fetchCategoryList
+req:userid
+res: categories:[{id,text}]
 
 
 2.文章列表页

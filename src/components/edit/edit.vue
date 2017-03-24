@@ -6,6 +6,12 @@
         <i-input type="text" :value.sync="formItem.input" placeholder="输入标题名">
           <Icon type="document-text" slot="prepend"></Icon>
         </i-input>
+
+      </Form-item>
+      <Form-item>
+        <i-select :model.sync="choseCategory" style="width:200px">
+          <i-option v-for="c in categories" :value="c.id">{{c.text}}</i-option>
+        </i-select>
       </Form-item>
       <Form-item>
         <i-button type="primary" @click="save">保存并上传</i-button>
@@ -25,7 +31,7 @@
     data(){
         return(
           {
-            content: '',
+            content: '',choseCategory:'',categories:{},
             configs: {
               spellChecker: false // 禁用拼写检查
             },
@@ -54,10 +60,10 @@
           console.log(content)
           this.$Message.success('您当前的文本已经保存');
         },
-      save(){ //db
+      save(){
             let content=this.content
             //校验
-            if(this.formItem.input.trim()==''||content.trim()==''){
+            if(this.formItem.input.trim()==''||content.trim()==''||this.choseCategory==''){
                 this.$Message.warning('请输入内容')
               return;
             }
@@ -68,6 +74,18 @@
             setTimeout(l, 3000);
 
       }
+    },
+    ready(){
+        let userid='ssdsad'//temp
+        //ajax here
+        //edit/fetchCategoryList
+        let categories=[
+          {id:12,text:'分类一'},
+          {id:12,text:'分类一'},
+          {id:12,text:'分类一'},
+          {id:12,text:'分类一'}
+        ]
+      this.categories=categories
     },
     detached(){
         console.log('detached')

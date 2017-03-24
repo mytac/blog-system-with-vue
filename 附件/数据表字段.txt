@@ -4,10 +4,13 @@ id 用户id type（普通通知0/投稿成功1/投稿失败2） desc（文本描
 
 文章表
 字段
-textid userid status(1发表/0草稿) title（文章标题）content likeNum createDate
+textid userid status(1发表/0草稿) title（文章标题）content likeNum createDate categoryId
 
 文章点赞表
 textid likeUsersid(点赞的用户id数组)
 
 文章评论表
 textid items:[{userid,comment,createDate,userName}]
+
+用户文章分类表
+(category)id userid categoryText

@@ -6,6 +6,7 @@
   ul.article-list{
     padding-top:20px;
   }
+  li{cursor:pointer;}
 .blog{
   width:100%;
   height:182px;
