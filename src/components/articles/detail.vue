@@ -63,6 +63,7 @@ import comment from './comment.vue'
     },
     methods: {
       likeIt(){
+        if(this.$route.params.userId=='null'){this.$Message.warning('登录才能点赞');return;}
         if(this.article.userId==this.$route.params.userId){
             this.$Message.warning('亲爱的，不可以给自己点赞呦~~~')
           return;
@@ -70,6 +71,8 @@ import comment from './comment.vue'
         let id = this.article.likeNum
         //ajax here...
         //article/likeIt
+        let status=0 //temp
+        status==1? this.article.likeNum++ : this.$Message.warning('您已经点赞过了!')
 
       },
       openComment(){
@@ -95,6 +98,11 @@ import comment from './comment.vue'
         'comment':comment
     },
     ready(){
+      let userId=this.$route.params.userId
+      if(userId){
+        this.$dispatch('userId',userId)
+      }
+
       //ajax here...
       //article/showDetail
       let article = { //temp

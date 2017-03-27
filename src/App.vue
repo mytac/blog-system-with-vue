@@ -96,7 +96,7 @@
         },
         'userId':function(userId){
           this.userId=userId
-          if(userId!=''){
+          if(userId!=''&&userId!='null'){
               this.isLogin=true
           }
         }

@@ -102,7 +102,7 @@
         <p><a @click="queryAll">查看全部</a></p>
       </Card>
     </div>
-    
+
   </div>
 
 </template>
