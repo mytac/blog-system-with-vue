@@ -96,6 +96,9 @@
         },
         'userId':function(userId){
           this.userId=userId
+          if(userId!=''){
+              this.isLogin=true
+          }
         }
     },
     components: {

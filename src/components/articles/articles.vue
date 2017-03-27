@@ -154,6 +154,10 @@ import hotWriters from '../index/hotWriters.vue'
       }
     },
     ready(){
+      let userId=this.$route.params.userId
+      if(userId){
+        this.$dispatch('userId',userId)
+      }
           //ajax here
           //article/showCategoryList
       this.queryAll()

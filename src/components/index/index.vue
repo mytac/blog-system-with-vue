@@ -14,7 +14,7 @@
       </i-col>
       <i-col span="8">
         <Row>
-          <read-category></read-category>
+          <read-category v-if="isLogin"></read-category>
         </Row>
         <Row>
           <hot-writers></hot-writers>
@@ -34,7 +34,7 @@
   export default{
     data(){
       return {
-
+        blogs:[]
       }
     },
     methods:{
@@ -48,8 +48,10 @@
       'hot-writers':hotWriters
     },
     attached(){
-        if(this.$route.params.userId){
-          this.$dispatch('userId',this.$route.params.userId)
+        //must
+        let userId=this.$route.params.userId
+        if(userId){
+          this.$dispatch('userId',userId)
         }
 
 

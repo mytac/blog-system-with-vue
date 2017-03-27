@@ -84,7 +84,10 @@
       }
     },
     ready(){
-        let userid=this.$route.params.userId//temp
+      let userId=this.$route.params.userId
+      if(userId){
+        this.$dispatch('userId',userId)
+      }
         //ajax here
         //edit/fetchCategoryList
         let categories=[
