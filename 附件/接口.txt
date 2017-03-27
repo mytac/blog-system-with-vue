@@ -44,7 +44,7 @@ content,userId(作者id，非用户id),status,title,likeNum
 2)article/likeIt (喜欢此文)
 req:userId(用户id)
 res:
-null
+status
 
 3)article/comments
 req:textid

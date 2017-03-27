@@ -39,7 +39,7 @@ export default{
   },
   watch:{
     'userId':function(val){
-      if(val&&val!=''||'null'){
+      if(val&&val!=''&&val!='null'){
         this.isLogin=true
       }
     }
