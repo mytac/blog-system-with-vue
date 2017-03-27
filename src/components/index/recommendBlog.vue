@@ -2,6 +2,7 @@
   .blog{
     margin-top: 3%;
     border-bottom:2px solid #f0f0f0;
+    cursor: pointer;
   }
   .blog:first-child{
     margin-top:0;
@@ -46,7 +47,7 @@
 <template>
     <div>
       <div class="blog" v-for="b in blogs">
-        <Row>
+        <Row @click="detail(b.textId)">
           <i-col span="16">
             <div class="topbar">
               <img class="avatar" :src="b.avatar">
@@ -62,10 +63,8 @@
         </Row>
         <Row>
           <div class="bottom-wrapper">
-            <div class="tag">{{b.tag}}</div>
-            <span class="ikon"><Icon type="eye" size="15"></Icon>{{b.eye}}</span>
-            <span class="ikon"><Icon type="chatbox" size="15"></Icon>{{b.review}}</span>
-            <span class="ikon"><Icon type="heart" size="15"></Icon>{{b.like}}</span>
+            <span class="ikon"><Icon type="chatbox" size="15"></Icon>{{b.commentNum}}</span>
+            <span class="ikon"><Icon type="heart" size="15"></Icon>{{b.likeNum}}</span>
           </div>
         </Row>
       </div>
@@ -76,18 +75,37 @@
     export default{
         data(){
             return{
-              blogs:[
-                {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',
-                  title:'王健林创业三年被告222次',content:'这篇文章有点鸡汤，是我以前写的，发在我的领英账号，现在读着，觉得都还是心里想说的话。 英文版在后面。 ﻿ ﻿沿着梦想和现实打造快乐﻿﻿ 那天读到领英CEO Jeff Wein...',cover:require('./recommendBlog/orange.png')
-                  ,tag:'职业成长',eye:'1200',review:51,like:'500'},
-                {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',
-                  title:'王健林创业三年被告222次',content:'11111111111',cover:require('./recommendBlog/orange.png')
-                  ,tag:'职业成长',eye:'1200',review:51,like:'500'},
-                {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',
-                  title:'王健林创业三年被告222次',content:'11111111111',cover:require('./recommendBlog/orange.png')
-                  ,tag:'职业成长',eye:'1200',review:51,like:'500'},
-              ]
+              blogs:[]
             }
+        },
+      methods:{
+        detail(textId){
+          this.$router.go({name:'detail',params:{'articleId':textId,'userId':this.userid||'null'}})
         }
+      },
+      props:{
+        userid:{
+            type:String
+        }
+      },
+      ready(){
+            //ajax here...
+            //index/goodBlogs
+            let blogs=[
+              {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',textId:'0141',
+                title:'王健林创业三年被告222次',content:'这篇文章有点鸡汤，是我以前写的，发在我的领英账号，现在读着，觉得都还是心里想说的话。 英文版在后面。 ﻿ ﻿沿着梦想和现实打造快乐﻿﻿ 那天读到领英CEO Jeff Wein...',cover:require('./recommendBlog/orange.png')
+                ,commentNum:51,likeNum:'500'},
+              {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',textId:'0141',
+                title:'王健林创业三年被告222次',content:'这篇文章有点鸡汤，是我以前写的，发在我的领英账号，现在读着，觉得都还是心里想说的话。 英文版在后面。 ﻿ ﻿沿着梦想和现实打造快乐﻿﻿ 那天读到领英CEO Jeff Wein...',cover:require('./recommendBlog/orange.png')
+                ,commentNum:51,likeNum:'500'},
+              {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',textId:'0141',
+                title:'王健林创业三年被告222次',content:'这篇文章有点鸡汤，是我以前写的，发在我的领英账号，现在读着，觉得都还是心里想说的话。 英文版在后面。 ﻿ ﻿沿着梦想和现实打造快乐﻿﻿ 那天读到领英CEO Jeff Wein...',cover:require('./recommendBlog/orange.png')
+                ,commentNum:51,likeNum:'500'},
+              {avatar:require('./recommendBlog/orange.png'),userId:'打电话和',date:'昨天 10:21',textId:'0141',
+                title:'王健林创业三年被告222次',content:'这篇文章有点鸡汤，是我以前写的，发在我的领英账号，现在读着，觉得都还是心里想说的话。 英文版在后面。 ﻿ ﻿沿着梦想和现实打造快乐﻿﻿ 那天读到领英CEO Jeff Wein...',cover:require('./recommendBlog/orange.png')
+                ,commentNum:51,likeNum:'500'}
+            ]
+        this.blogs=blogs
+      }
     }
 </script>

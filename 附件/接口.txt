@@ -20,17 +20,18 @@ res: categories:[{id,text}]
 
 
 2.文章列表页
-1)article/showList
+1)类型表
+article/showCategoryList
 req:
-userId,itemNum,currentId,totalNum,
+userId
 res:
-items:[textId,createDate,likeNum,shortCut,title] 按时间顺序排
+category:[cid,title]
 
 2)按类型查
 articles/queryByCategory
-req:userId cid
+req:userId cid(空的是全部) itemNum,currentId,totalNum
 res:
-items:[textId,createDate,likeNum,shortCut,title]
+items:[textId,createDate,likeNum,shortCut,title] 按时间顺序排
 
 
 3.文章详情页(展示)
@@ -56,3 +57,9 @@ items:[{userId,createDate,content,username}]
 sign/checkLogin
 req:userid password
 res:status
+
+5.index页
+1)首页文章推荐
+index/goodBlogs
+req:''
+res:[{textId,title,shortCut,userId(创建者id),createDate,likeNum,commentNum}]

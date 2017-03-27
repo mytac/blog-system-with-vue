@@ -70,14 +70,23 @@
               ]
             }
         },
+      props:{
+        islogin:{
+            type:Boolean
+        }
+      },
       methods:{
         follow(id){
+          let statusCode=0 //temp
           const alertMsg=[
               {status:'error',text:'服务器不想和你说话，并抛出一个异常'},
-              {status:'success',text:'操作成功'}
+              {status:'success',text:'操作成功'},
+              {status:'warning',text:'请您先登录再进行其他操作'}
           ]
-          let statusCode=0 //temp
-          console.log(id)
+          if(this.islogin==false){
+            statusCode=2
+          }
+
           //ajax here..
           // return for **[statusCode]**
 

@@ -42,7 +42,7 @@
     <div id="content"></div>
   </div>
   <div class="switch">
-    <Switch @on-change="openComment"></Switch>展开评论
+    <Switch :disabled="switchClose" @on-change="openComment" ></Switch>展开评论
   </div>
   <div class="comments" v-if="showComment">
     <comment :comments="comments"></comment>
@@ -57,7 +57,7 @@ import comment from './comment.vue'
     data(){
       return ({
         article: {},
-        showComment:false,
+        showComment:false,switchClose:false,
         comments:[]
       })
     },
@@ -73,6 +73,11 @@ import comment from './comment.vue'
 
       },
       openComment(){
+          if(this.$route.params.userId=='null'){
+              this.switchClose=true
+              this.$Message.warning('登陆才能查看评论')
+            return;
+          }
         //ajax here...
         //article/comments
         let comments=[
@@ -90,7 +95,6 @@ import comment from './comment.vue'
         'comment':comment
     },
     ready(){
-      console.log(this.$route.params.articleId)
       //ajax here...
       //article/showDetail
       let article = { //temp
