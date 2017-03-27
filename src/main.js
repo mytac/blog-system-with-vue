@@ -76,11 +76,11 @@ router.map({
       }
     }
   },
-  '/edit/:userId':{
+  '/edit/:userId/:textId':{
       name:'edit',
       component:edit
   },
-  '/add':{
+  '/add/:userId':{
     name:'add',
     component:edit
   },

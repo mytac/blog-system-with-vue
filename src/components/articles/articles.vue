@@ -160,14 +160,16 @@
         this.$router.go({name: 'detail', params: {userId: userid, articleId: id}})
       },
       edit(id){
+        let userid = this.$route.params.userId
+        this.$router.go({name: 'edit', params: {userId: userid, textId: id}})
       },
       remove(id){
         this.modal2 = true
-        this.removeId=id
+        this.removeId = id
       },
       del(){
-          let textId=this.removeId
-          //ajax here
+        let textId = this.removeId
+        //ajax here
       },
       queryAll(){
         //ajax here...

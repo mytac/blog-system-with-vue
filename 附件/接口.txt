@@ -1,6 +1,6 @@
 1.编辑页
-1)保存
-edit/saveContent
+1)新增保存
+add/saveContent
 请求参数
 userid,content,title
 回调参数
@@ -18,6 +18,10 @@ edit/fetchCategoryList
 req:userid
 res: categories:[{id,text}]
 
+4)编辑保存
+edit/saveContent
+req:textId,userId,title,content
+res:status
 
 2.文章列表页
 1)类型表
@@ -39,7 +43,7 @@ items:[textId,createDate,likeNum,shortCut,title] 按时间顺序排
 req:
 textId
 res:
-content,userId(作者id，非用户id),status,title,likeNum
+content,userId(作者id，非用户id),status,title,likeNum,date,categoryId,categoryName
 
 2)article/likeIt (喜欢此文)
 req:userId(用户id)

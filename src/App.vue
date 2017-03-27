@@ -40,7 +40,7 @@
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
-            <Menu-item key="4" v-if="isLogin" @click="goto('edit',['userId'])">
+            <Menu-item key="4" v-if="isLogin" @click="goto('add',['userId'])">
               <Icon type="edit"></Icon>
               写日志
             </Menu-item>
