@@ -1,4 +1,4 @@
-1.编辑页
+﻿1.编辑页
 1)新增保存
 add/saveContent
 请求参数
@@ -60,7 +60,7 @@ items:[{userId,createDate,content,username}]
 1)登陆检查
 sign/checkLogin
 req:userid password
-res:status
+res:status(1/0)
 
 5.index页
 1)首页文章推荐

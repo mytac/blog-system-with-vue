@@ -110,6 +110,9 @@
         _self.showLoader = false
       }, 1000)
 
+    },
+    ready(){
+    
     }
 
   }

@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App'
 import iView from 'iview';
+import $ from 'jquery';
+window.$ = $
+window.jQuery = $
+export default $
 import 'iview/dist/styles/iview.css';
 
 import signin from './components/sign/signin'
@@ -16,6 +20,8 @@ import atten_hot from './components/attention/sub_hot.vue'
 import atten_new from './components/attention/sub_new.vue'
 
 import blogs from './components/index/recommendBlog.vue'
+
+import test from './components/test.vue'
 
 var VueRouter = require('vue-router')
 
@@ -88,9 +94,13 @@ router.map({
     name:'articles',
     component:articles
   },
-  'detail/:userId/:articleId':{
+  '/detail/:userId/:articleId':{
     name:'detail',
     component:detail
+  },
+  '/test':{
+    name:'test',
+    component:test
   }
 })
 router.start(App,'#app')
