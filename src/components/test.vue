@@ -13,7 +13,7 @@
         type:'get',
         url:'http://localhost:3000/user/edit.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'addCategory',userId:123,title:'eqwewe'}),
+        data:'data='+JSON.stringify({chose:'getArticleCategory',userId:211}),
         success:function(data){
             console.log(data)
         }

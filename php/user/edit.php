@@ -21,7 +21,7 @@ $conn = mysqli_connect('localhost:3306', 'root', 'root','blog');
 //db
 function loopQuery($res){
     $arr =  array();
-    while($row = mysqli_fetch_array($res)){
+    while($row = mysqli_fetch_object($res)){
         $arr[] = $row;
     }
     return $arr;
@@ -37,6 +37,7 @@ function queryBasic($sql,$type,$isTable){
         default:return loopQuery($res);break;//【{}，{}】
     }
 }
+// 异常处理
 function insertError($sql){
     if(queryBasic($sql,2,'')){
         return array('status'=>1);
@@ -46,7 +47,16 @@ function insertError($sql){
     $error=array('status'=>0,'msg'=>$msg);
     return $error;
 }
-
+function queryError($sql,$type,$bean){
+    $res=queryBasic($sql,$type,'');
+    if(is_string($res)==false){
+        return array('status'=>1,$bean=>$res);
+    }
+    global $conn;
+    $msg=mysqli_error($conn);
+    $error=array('status'=>0,'msg'=>$msg);
+    return $error;
+}
 
 
 //保存文章
@@ -57,19 +67,26 @@ function saveContent($d){
     $content=$d['content'];
     $categoryId=$d['categoryId'];
     $sql="INSERT INTO article VALUES (NULL,$userId,'$title','$content',$categoryId)";
-    return insertError($sql);
+    return insertError($sql,2);
 }
 //新建分类
 function addCategory($d){
     $userId=$d['userId'];
     $title=$d['title'];
-    $sql="INSERT INTO category VALUES ($userId,NULL,'$title')";
-    return insertError($sql);
+    $sql="INSERT INTO category VALUES (NULL,'$userId=!end!=$title','$userId')";
+    return insertError($sql,2);
+}
+//获取用户的文章分类
+function getArticleCategory($d){
+    $userId=$d['userId'];
+    $sql="SELECT id,title  FROM category WHERE userid='$userId'";
+    return queryError($sql,100,'category');
 }
 //main
 switch($d['chose']){
     case "saveContent": $back=saveContent($d);break;
     case 'addCategory':$back=addCategory($d);break;
+    case 'getArticleCategory': $back=getArticleCategory($d);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back
