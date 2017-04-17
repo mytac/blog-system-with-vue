@@ -11,9 +11,9 @@
 	
 	  $.ajax({
         type:'get',
-        url:'http://localhost:3000/user/edit.php',
+        url:'http://localhost:3000/user/index.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'getArticleCategory',userId:211}),
+        data:'data='+JSON.stringify({chose:'goodWriters'}),
         success:function(data){
             console.log(data)
         }
