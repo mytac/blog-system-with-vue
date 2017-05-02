@@ -96,7 +96,7 @@
         },
         'userId':function(userId){
           this.userId=userId
-          if(userId!=''&&userId!='null'){
+          if(userId!=''&&userId!=='null'){
               this.isLogin=true
           }
         }
@@ -112,7 +112,7 @@
 
     },
     ready(){
-    
+
     }
 
   }
