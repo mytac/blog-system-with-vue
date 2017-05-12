@@ -88,8 +88,19 @@ function fetchRegistData($d){
         $error=array('status'=>0,'msg'=>$msg);
         return $error;
     }
+//推荐作者
 function getGoodWriters(){
-   $sql="SELECT * FROM article WHERE isHot=1";
+   $sql="SELECT * FROM userinfo WHERE isHot=1";
+    return queryError($sql,99,'body');
+}
+//推荐文章
+function goodArticle(){
+    $sql="SELECT * FROM article WHERE isHot=1";
+    return queryError($sql,99,'body');
+}
+//显示通知
+function showNotification($userId){
+    $sql="SELECT * FROM notification WHERE userId=$userId";
     return queryError($sql,99,'body');
 }
 //main
@@ -97,6 +108,8 @@ switch($d['chose']){
     case "isLogin": $get_id=$d['username'];$get_psd=$d['psd'];$back=isLogin($get_id,$get_psd);break;
     case "regist":$back=fetchRegistData($d);break;
     case "goodWriters":$back=getGoodWriters();break;
+    case "goodArticle":$back=goodArticle();break;
+    case "showNotification":$back=showNotification($d['userId']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back
