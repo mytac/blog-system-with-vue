@@ -22,10 +22,6 @@ function loopQuery($res){
 }
 
 function queryBasic($sql,$type,$isTable){
-   /* if(!$isTable){
-       $conn = mysqli_connect('localhost:3306', 'root', 'root','blog');
-    }
-    else{$conn = mysqli_connect('localhost:3306', 'root', 'root');}*/
     global $conn;
     $res=mysqli_query($conn,$sql);
     switch($type){
@@ -58,9 +54,11 @@ function queryError($sql,$type,$bean){
 
 //登录注册页
 //登录验证
-function isLogin($id,$psd){
-    $sql = "SELECT psd FROM userLog where username=$id";
-    return $psd==queryBasic($sql,0,'')[0]? 1:0;
+function isLogin($username,$psd){
+    $sql = "SELECT psd,type FROM userlog where username='$username'";
+    $realPsd=queryBasic($sql,0,'');
+    if($psd==$realPsd[0]) return array('status'=>1,'type'=>$realPsd[1]);
+    return array('status'=>0);
 }
 //注册页获取字段
 function fetchRegistData($d){
@@ -105,7 +103,7 @@ function showNotification($userId){
 }
 //main
 switch($d['chose']){
-    case "isLogin": $get_id=$d['username'];$get_psd=$d['psd'];$back=isLogin($get_id,$get_psd);break;
+    case "isLogin": $back=isLogin($d['username'],$d['psd']);break;
     case "regist":$back=fetchRegistData($d);break;
     case "goodWriters":$back=getGoodWriters();break;
     case "goodArticle":$back=goodArticle();break;

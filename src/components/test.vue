@@ -2,8 +2,7 @@
 
 </style>
 <template>
-
-  </div>
+<div></div>
 </template>
 <script type="text/ecmascript-6">
   export default {
@@ -11,9 +10,9 @@
 	
 	  $.ajax({
         type:'get',
-        url:'http://localhost:3000/user/detail.php',
+        url:'http://localhost:3000/user/index.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'doComment',articleId:1,userId:120,content:'dysydusdyyusd'}),
+        data:'data='+JSON.stringify({chose:'isLogin',username:'asd',psd:222}),
         success:function(data){
             console.log(data)
         }

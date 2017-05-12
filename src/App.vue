@@ -48,6 +48,10 @@
               <Icon type="ios-book"></Icon>
               我的文章
             </Menu-item>
+            <Menu-item key="6" v-if="isLogin" @click="goto('adminMain',['userId])">
+              <Icon type="ios-book"></Icon>
+              管理员
+            </Menu-item>
           </Menu>
         </i-col>
       </Row>
