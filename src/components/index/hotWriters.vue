@@ -42,15 +42,15 @@
         <div class="wrapper">
           <div class="writers" v-for="w in writers">
             <div class="avatar">
-              <img :src="w.avatarUrl">
+              <img src="./hotWriters/orange.png">
             </div>
             <div class="content">
-              <h4>{{w.title}}</h4>
-              <span>被{{w.followNum}}人关注</span>
+              <h4>{{w.nickname}}</h4>
+              <span>被{{w.fansNum}}人关注</span>
               <span>收获{{w.likeNum}}喜欢</span>
             </div>
             <div class="follow">
-              <i-button type="success" size="small" @click="follow(w.id)">+关注</i-button>
+              <i-button type="success" size="small" @click="follow(w.id,w.nickname)">+关注</i-button>
             </div>
           </div>
         </div>
@@ -73,11 +73,17 @@
       props:{
         islogin:{
             type:Boolean
+        },
+        userid:{
+            type:String
         }
       },
       methods:{
-        follow(id){
-          let statusCode=0 //temp
+        follow(id,nickname){
+            const _self=this
+          const userId=this.userid
+          console.log(userId)
+          let statusCode=null //temp
           const alertMsg=[
               {status:'error',text:'服务器不想和你说话，并抛出一个异常'},
               {status:'success',text:'操作成功'},
@@ -89,11 +95,33 @@
 
           //ajax here..
           // return for **[statusCode]**
+          $.ajax({
+            type:'get',
+            url:'http://localhost:3000/user/index.php',
+            dataType:'json',
+            data:'data='+JSON.stringify({chose:'followArticle',id:userId ,writerid:id,writername:nickname}),
+            success:function(data){
+              console.log(data)
+              statusCode=data.status
+              let str="_self.$Message."+alertMsg[statusCode].status+"('"+alertMsg[statusCode].text+"')"
+              eval(str)
+            }
+          });
 
 
-          let str="this.$Message."+alertMsg[statusCode].status+"('"+alertMsg[statusCode].text+"')"
-          eval(str)
         }
+      },
+      ready(){
+          const _self=this
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/index.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'goodWriters'}),
+          success:function(data){
+            _self.writers=data.body
+          }
+        });
       }
     }
 </script>

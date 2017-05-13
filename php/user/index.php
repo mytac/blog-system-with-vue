@@ -101,6 +101,17 @@ function showNotification($userId){
     $sql="SELECT * FROM notification WHERE userId=$userId";
     return queryError($sql,99,'body');
 }
+//关注作者
+function followArticle($userId,$writerId,$writerName){
+    $sql="SELECT id FROM userlog WHERE username='$userId'";
+    $id=queryError($sql,0,'body')['body'][0];
+    if(is_string($id)===true){
+        $sql="INSERT INTO `attention` (`id`, `userid`, `writerId`, `writername`) VALUES (NULL, '$id', '$writerId', '$writerName');";
+        return insertError($sql);
+    }
+    return array('status'=>0);
+
+}
 //main
 switch($d['chose']){
     case "isLogin": $back=isLogin($d['username'],$d['psd']);break;
@@ -108,6 +119,7 @@ switch($d['chose']){
     case "goodWriters":$back=getGoodWriters();break;
     case "goodArticle":$back=goodArticle();break;
     case "showNotification":$back=showNotification($d['userId']);break;
+    case "followArticle":$back=followArticle($d['id'],$d['writerid'],$d['writername']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back

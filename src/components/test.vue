@@ -10,9 +10,9 @@
 	
 	  $.ajax({
         type:'get',
-        url:'http://localhost:3000/user/index.php',
+        url:'http://localhost:3000/user/detail.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'isLogin',username:'asd',psd:222}),
+        data:'data='+JSON.stringify({chose:'showArticle',articleId:2}),
         success:function(data){
             console.log(data)
         }

@@ -76,6 +76,7 @@ import comment from './comment.vue'
 
       },
       openComment(){
+          const _self=this
           if(this.$route.params.userId=='null'){
               this.switchClose=true
               this.$Message.warning('登陆才能查看评论')
@@ -83,38 +84,41 @@ import comment from './comment.vue'
           }
         //ajax here...
         //article/comments
-        let comments=[
-          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'},
-          {userid:'12345',userName:'小花',comment:'大赛的静安寺的骄傲的三大',createDate:'2013-01-20'}
-        ]
-        this.comments=comments
-        this.showComment=!this.showComment
+        const articleId=this.$route.params.articleId
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/detail.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'showCommentList',articleId:articleId}),
+          success:function(data){
+            _self.comments=data.commentList
+            _self.showComment=!_self.showComment
+          }
+        });
       }
     },
     components:{
         'comment':comment
     },
     ready(){
+        const _self=this
       let userId=this.$route.params.userId
+      const articleId=this.$route.params.articleId
       if(userId){
         this.$dispatch('userId',userId)
       }
-
-      //ajax here...
-      //article/showDetail
-      let article = { //temp
-        content: 'Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it.',
-        title: '按时发放水电费',
-        userId: '12345',
-        likeNum: 20,
-        createDate: '2013-56-12'
-      }
-      this.article = article
-      let html_content = markdown.toHTML(article.content);
-      $('#content').html(html_content)
+      $.ajax({
+        type:'get',
+        url:'http://localhost:3000/user/detail.php',
+        dataType:'json',
+        data:'data='+JSON.stringify({chose:'showArticle',articleId:articleId}),
+        success:function(data){
+            const article=data.body[0]
+          _self.article = article
+          let html_content = markdown.toHTML(article.content);
+          $('#content').html(html_content)
+        }
+      });
     }
   }
 </script>

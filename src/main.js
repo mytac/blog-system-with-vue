@@ -20,7 +20,7 @@ import atten_hot from './components/attention/sub_hot.vue'
 import atten_new from './components/attention/sub_new.vue'
 
 import blogs from './components/index/recommendBlog.vue'
-import adminMain from './components/admin/main.vue'
+import admin from './components/admin/main.vue'
 
 import test from './components/test.vue'
 
@@ -101,7 +101,7 @@ router.map({
   },
   '/admin/:userId':{
     name:'admin',
-    component:adminMain
+    component:admin
   },
   '/test':{
     name:'test',

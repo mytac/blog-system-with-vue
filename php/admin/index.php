@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/4/10
- * Time: 20:51
- */
 header('Access-Control-Allow-Origin:*');
 header('Access-Control-Allow-Methods:PUT,GET,POST');
 header('Access-Control-Max-Age:60');
@@ -59,39 +53,20 @@ function queryError($sql,$type,$bean){
 }
 
 
-//保存文章
-function saveContent($d){
-    //$textId=$d['textId'];
-    $userId=$d['userId'];
-    $title=$d['title'];
-    $content=$d['content'];
-    $categoryId=$d['categoryId'];
-    $sql="SELECT id FROM userlog WHERE username='$userId'";
-    $id=queryError($sql,0,'body')['body'][0];
-    if(is_string($id)===true){
-        $sql="INSERT INTO article VALUES (NULL,'$id','$userId','$title','$content',$categoryId,0,0,0,CURRENT_TIMESTAMP)";
-        return insertError($sql,2);
-    }
-    return array('status'=>0);
+//（管理员）设置推荐文章
+function setHotArticle($articleId,$status){
+    $sql="UPDATE `article` SET `isHot` = $status WHERE `article`.`id` = $articleId";
+    return queryError($sql,2,'body');
 }
-//新建分类
-function addCategory($d){
-    $userId=$d['userId'];
-    $title=$d['title'];
-    $sql="INSERT INTO category VALUES (NULL,'$userId=!end!=$title','$userId')";
-    return insertError($sql,2);
-}
-//获取用户的文章分类
-function getArticleCategory($d){
-    $userId=$d['userId'];
-    $sql="SELECT id,title  FROM category WHERE userid='$userId'";
-    return queryError($sql,100,'category');
+//（管理员）设置推荐文章
+function setHotWriter($writerId,$status){
+    $sql="UPDATE `userinfo` SET `isHot` = $status WHERE `userinfo`.`id` = $writerId;";
+    return queryError($sql,2,'body');
 }
 //main
 switch($d['chose']){
-    case "saveContent": $back=saveContent($d);break;
-    case 'addCategory':$back=addCategory($d);break;
-    case 'getArticleCategory': $back=getArticleCategory($d);break;
+    case "setHotArticle": $back=setHotArticle($d['articleId'],$d['status']);break;
+    case "setHotWriter": $back=setHotWriter($d['writerId'],$d['status']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back

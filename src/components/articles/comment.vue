@@ -7,11 +7,11 @@
     <div v-for="c in comments">
       <div>
         <div class="author"><a  target="_blank" class="avatar"><img></a>
-          <div class="info"><a  target="_blank" class="name">{{c.userName}}</a> <!---->
-            <div class="meta"><span>{{c.createDate}}</span></div>
+          <div class="info"><a  target="_blank" class="name">{{c.userId}}</a> <!---->
+            <div class="meta"><span>{{c.createTime}}</span></div>
           </div>
         </div>
-        <div class="comment-wrap"><p>{{c.comment}}</p>
+        <div class="comment-wrap"><p>{{c.content}}</p>
           <div class="tool-group"><a><i class="iconfont ic-zan"></i></a> <a><i
             class="iconfont ic-comment"></i><span>回复</span></a> <a class="report"></a> <!----></div>
         </div>
@@ -34,7 +34,7 @@
           }
     },
     ready(){
-        if(this.comments[0]){
+        if(this.comments.length>0){
             this.showComment=true
         }
     }

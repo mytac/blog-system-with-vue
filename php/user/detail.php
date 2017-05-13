@@ -55,8 +55,13 @@ function queryError($sql,$type,$bean){
     $error=array('status'=>0,'msg'=>$msg);
     return $error;
 }
-
 //展示文章详情
+function showArticle($articleId){
+    $sql="SELECT * FROM article WHERE id=$articleId";
+    return queryError($sql,99,'body');
+}
+
+//展示文章评论
 function showCommentList($articleId){
     $sql="SELECT * FROM comment WHERE articleId=$articleId";
     return queryError($sql,99,'commentList');
@@ -70,6 +75,7 @@ function doComment($articleId,$userId,$content){
 
 //main
 switch($d['chose']){
+    case "showArticle":$back=showArticle($d['articleId']);break;
     case "showCommentList":$back=showCommentList($d['articleId']);break;
     case "doComment":$back=doComment($d['articleId'],$d['userId'],$d['content']);break;
     default: $back="in php there no set 'chose' property";break;

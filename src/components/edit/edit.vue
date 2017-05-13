@@ -77,6 +77,7 @@
         this.$Message.success('您当前的文本已经保存');
       },
       save(){
+        console.log('save')
         let content = this.content
         //校验
         if (this.title.trim() == '' || content.trim() == '' || this.choseCategory == '') {
@@ -85,13 +86,26 @@
         }
 
         if (this.$route.name == 'edit') {
-          let reqData = {'userId': this.editItem.userId, 'textId': this.editItem.textId}
+          let reqData = {chose:'saveContent','userId': this.editItem.userId, 'textId': this.editItem.textId,'title':this.title,
+            'content':this.content,'categoryId':5 //临时
+          }
           //ajax here...
           //edit/saveContent
 
         } else {
-          //ajax here...
-          //add/saveContent 新增(userid)
+          let reqData = {chose:'saveContent','userId': this.$route.params.userId, 'title':this.title,
+            'content':this.content,'categoryId':5 //临时
+          }
+          console.log(reqData)
+          $.ajax({
+            type:'get',
+            url:'http://localhost:3000/user/edit.php',
+            dataType:'json',
+            data:'data='+JSON.stringify(reqData),
+            success:function(data){
+              console.log(data)
+            }
+          });
         }
 
         const l = this.$Message.loading('正在保存中...', 0);

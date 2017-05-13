@@ -17,7 +17,7 @@
           <read-category v-if="isLogin"></read-category>
         </Row>
         <Row>
-          <hot-writers :islogin="isLogin"></hot-writers>
+          <hot-writers :islogin="isLogin" :userid="userId"></hot-writers>
         </Row>
       </i-col>
     </Row>
