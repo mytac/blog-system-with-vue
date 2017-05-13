@@ -9,48 +9,67 @@
                 columns7: [
                     {
                         title: 'id',
-                        key: 'id',
-                        render (row, column, index) {
-                            return `<Icon type="person"></Icon> <strong>${row.name}</strong>`;
-                        }
+                        key: 'id'
                     },
                     {
                         title: '文章标题',
                         key: 'title'
                     },
                     {
-                        title: '作者id',
-                        key: 'writerId'
+                        title: '作者名',
+                        key: 'username'
                     },
                     {
                         title: '操作',
-                        key: 'action',
+                        key: 'isHot',
                         width: 150,
                         align: 'center',
                         render (row, column, index) {
-                            return `<i-button type="primary" size="small" @click="show(${index})">首页显示</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
-                        }
+                        const status=row.isHot
+                        const text=status==1?'取消显示':'首页显示';
+                        const klass=status==1?'error':'primary';
+                        const id=row.id
+
+                            return `<i-button type=${klass} size="small" @click="show(${id},${status},${index})">${text}</i-button>`                        }
                     }
                 ],
-                data6: [
-                    {
-                        id: '王小明',
-                        title: 18,
-                        writerId: '北京市朝阳区芍药居'
-                    }
-                ]
+                data6: []
             }
         },
         methods: {
-            show (index) {
-                this.$Modal.info({
-                    title: '用户信息',
-                    content: `姓名：${this.data6[index].name}<br>年龄：${this.data6[index].age}<br>地址：${this.data6[index].address}`
-                })
+            show (id,status,index) {
+            const _self=this
+            $.ajax({
+            type:'get',
+            url:'http://localhost:3000/admin/index.php',
+            dataType:'json',
+            data:'data='+JSON.stringify({chose:'setHotArticle',articleId:id,status:status==0?1:0}),
+            success:function(data){
+            if(data.status==1){
+                _self.$Message.success('修改成功')
+                _self.data6[index].isHot=status==0?1:0
+            }else{
+            $Message.error('修改失败')
+            }
+        }
+      });
             },
             remove (index) {
                 this.data6.splice(index, 1);
             }
+        },
+        ready(){
+        const _self=this
+        $.ajax({
+        type:'get',
+        url:'http://localhost:3000/admin/index.php',
+        dataType:'json',
+        data:'data='+JSON.stringify({chose:'showArticleList'}),
+        success:function(data){
+            console.log(data)
+            _self.data6=data.body
+        }
+      });
         }
     }
 </script>

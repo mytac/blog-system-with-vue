@@ -63,10 +63,16 @@ function setHotWriter($writerId,$status){
     $sql="UPDATE `userinfo` SET `isHot` = $status WHERE `userinfo`.`id` = $writerId;";
     return queryError($sql,2,'body');
 }
+// （管理员）获取所有文章
+function showArticleList(){
+    $sql="SELECT id,username,title,isHot FROM article";
+    return queryError($sql,99,'body');
+}
 //main
 switch($d['chose']){
     case "setHotArticle": $back=setHotArticle($d['articleId'],$d['status']);break;
     case "setHotWriter": $back=setHotWriter($d['writerId'],$d['status']);break;
+    case "showArticleList": $back=showArticleList();break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back
