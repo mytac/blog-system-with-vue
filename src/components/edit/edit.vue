@@ -84,17 +84,8 @@
           this.$Message.warning('请输入内容')
           return;
         }
-
-        if (this.$route.name == 'edit') {
-          let reqData = {chose:'saveContent','userId': this.editItem.userId, 'textId': this.editItem.textId,'title':this.title,
-            'content':this.content,'categoryId':5 //临时
-          }
-          //ajax here...
-          //edit/saveContent
-
-        } else {
           let reqData = JSON.stringify({chose:'saveContent',userId: this.$route.params.userId,title:this.title,
-            content:this.content,categoryId:2
+            content:this.content,categoryId:2,textId:_self.$route.params.textId||''
           })
           $.ajax({
             type:'get',
@@ -110,7 +101,6 @@
             }
 
           });
-        }
 
         const l = this.$Message.loading('正在保存中...', 0);
         this.selfSave = true
