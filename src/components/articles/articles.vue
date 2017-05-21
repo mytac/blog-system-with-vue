@@ -94,14 +94,14 @@
                 <span class="title">{{a.title}}</span>
               </h4>
             </div>
-            <div class="short-cut" @click="goDetail(a.textId)">
-              <p>{{a.shortCut}}</p>
+            <div class="short-cut" @click="goDetail(a.id)">
+              <p>{{a.content}}</p>
             </div>
             <div class="tools">
-              <span class="date">2017-3-22</span>
+              <span class="date">{{a.createTime}}</span>
               <span class="heart"><Icon type="heart"></Icon><span class="like-num">{{a.likeNum}}</span></span>
-              <span style="cursor: pointer"><Icon type="compose" @click="edit(a.textId)"></Icon></span>
-              <span style="cursor: pointer"><Icon type="trash-a" @click="remove(a.textId)"></Icon></span>
+              <span style="cursor: pointer"><Icon type="compose" @click="edit(a.id)"></Icon></span>
+              <span style="cursor: pointer"><Icon type="trash-a" @click="remove(a.id)"></Icon></span>
             </div>
           </div>
         </li>
@@ -148,7 +148,8 @@
       return ({
         modal2: false, removeId: null,
         articles: [],
-        categories: []
+        categories: [],
+        userId:''
       })
     },
     components: {
@@ -168,10 +169,36 @@
         this.removeId = id
       },
       del(){
+        const _self=this
         let textId = this.removeId
         //ajax here
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/edit.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'deleteArticle',id:textId }),
+          success:function(data){
+            if(data.status==1){
+                _self.$Message.success('删除成功')
+            }else{
+                _self.$Message.error('删除失败')
+            }
+          }
+        })
       },
-      queryAll(){
+      queryAll(userId){
+          const _self=this
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/edit.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'getArticleList',userId:userId }),
+          success:function(data){
+            if(data.status==1){
+                _self.articles=data.articles
+            }
+          }
+        })
         //ajax here...
         //articles/queryByCategory (cid='')
         let mockData = [
@@ -206,7 +233,7 @@
             likeNum: 20
           }
         ]
-        this.articles = mockData
+        //this.articles = mockData
       },
       queryByCategory(cid){
         //ajax here...
@@ -248,12 +275,13 @@
     },
     ready(){
       let userId = this.$route.params.userId
+      this.userId=userId
       if (userId) {
         this.$dispatch('userId', userId)
       }
       //ajax here
       //article/showCategoryList
-      this.queryAll()
+      this.queryAll(userId)
       let categories = [
         {cid: 1, title: '分类1'},
         {cid: 1, title: '分类2'},

@@ -12,7 +12,7 @@
         type:'get',
         url:'http://localhost:3000/user/edit.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'saveContent',userId:'233',title:'test',content:'content test',categoryId:2}),
+        data:'data='+JSON.stringify({chose:'saveContent',title:'11111777',userId:'233',categoryId:5,content:'test' }),
         success:function(data){
             console.log(data)
         }

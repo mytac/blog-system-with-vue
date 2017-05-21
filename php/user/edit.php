@@ -59,9 +59,9 @@ function queryError($sql,$type,$bean){
 }
 
 
-//保存文章
+//保存或更新文章
 function saveContent($d){
-    //$textId=$d['textId'];
+    $textId=$d['textId'];
     $userId=$d['userId'];
     $title=$d['title'];
     $content=$d['content'];
@@ -69,7 +69,11 @@ function saveContent($d){
     $sql="SELECT id FROM userlog WHERE username='$userId'";
     $id=queryError($sql,0,'body')['body'][0];
     if(is_string($id)===true){
-        $sql="INSERT INTO article VALUES (NULL,'$id','$userId','$title','$content',$categoryId,0,0,0,CURRENT_TIMESTAMP)";
+        if(!empty($textId)){
+            $sql="UPDATE `article` SET `title` = '$title', `categoryId` = '$categoryId',`content`='$content' WHERE `article`.`id` = $textId";}
+        else{
+            $sql="INSERT INTO article VALUES (NULL,'$id','$userId','$title','$content',$categoryId,0,0,0,CURRENT_TIMESTAMP)";
+        }
         return insertError($sql,2);
     }
     return array('status'=>0);
@@ -87,11 +91,23 @@ function getArticleCategory($d){
     $sql="SELECT id,title  FROM category WHERE userid='$userId'";
     return queryError($sql,100,'category');
 }
+// 拉取文章列表
+function getArticleList($userId){
+    $sql="SELECT id,title,content,likeNum,createTime FROM article WHERE username='$userId'";
+    return queryError($sql,100,'articles');
+}
+// 删除指定文章
+function deleteArticle($id){
+    $sql="DELETE FROM `article` WHERE `article`.`id` = $id";
+    return insertError($sql,2);
+}
 //main
 switch($d['chose']){
     case "saveContent": $back=saveContent($d);break;
     case 'addCategory':$back=addCategory($d);break;
     case 'getArticleCategory': $back=getArticleCategory($d);break;
+    case 'getArticleList': $back=getArticleList($d['userId']);break;
+    case 'deleteArticle':$back=deleteArticle($d['id']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back

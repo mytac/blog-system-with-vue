@@ -127,20 +127,26 @@
 
       //edit
       if (this.$route.name == 'edit') {
+          const _self=this
         this.editItem.textId = this.$route.params.textId
         this.editItem.userId = this.$route.params.userId
         //ajax here...
         //article/showDetail
-        let resData = {
-          content: '## 测试 \n ### 测试2',
-          title: '册书',
-          date: '2013-56-12',
-          categoryId: 12,
-          categoryName: '分类一'
-        }
-        this.content = resData.content
-        this.title = resData.title
-        this.choseCategory = resData.categoryId
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/detail.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'showArticle',articleId:_self.$route.params.textId }),
+          success:function(data){
+            if(data.status==1){
+              _self.content = data.body[0].content
+              _self.title = data.body[0].title
+            }else{
+                _self.$Message.error('请求失败，请重新登录系统')
+            }
+          }
+        })
+        this.choseCategory = 1 //temp
       }
 
     },
