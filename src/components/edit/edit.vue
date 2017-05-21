@@ -77,7 +77,7 @@
         this.$Message.success('您当前的文本已经保存');
       },
       save(){
-        console.log('save')
+        const _self=this
         let content = this.content
         //校验
         if (this.title.trim() == '' || content.trim() == '' || this.choseCategory == '') {
@@ -93,18 +93,22 @@
           //edit/saveContent
 
         } else {
-          let reqData = {chose:'saveContent','userId': this.$route.params.userId, 'title':this.title,
-            'content':this.content,'categoryId':5 //临时
-          }
-          console.log(reqData)
+          let reqData = JSON.stringify({chose:'saveContent',userId: this.$route.params.userId,title:this.title,
+            content:this.content,categoryId:2
+          })
           $.ajax({
             type:'get',
             url:'http://localhost:3000/user/edit.php',
             dataType:'json',
-            data:'data='+JSON.stringify(reqData),
+            data:'data='+reqData,
             success:function(data){
-              console.log(data)
+              if(data.status==1){
+                _self.$Message.success('保存成功')
+              }else{
+                _self.$Message.error('保存失败，请重新登录后再试')
+              }
             }
+
           });
         }
 

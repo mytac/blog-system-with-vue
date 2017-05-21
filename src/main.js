@@ -99,7 +99,7 @@ router.map({
     name:'detail',
     component:detail
   },
-  '/admin/:userId':{
+  '/admin':{
     name:'admin',
     component:admin
   },

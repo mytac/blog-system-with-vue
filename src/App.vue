@@ -48,7 +48,7 @@
               <Icon type="ios-book"></Icon>
               我的文章
             </Menu-item>
-            <Menu-item key="6" v-if="isLogin" @click="goto('adminMain',['userId])">
+            <Menu-item key="6" v-if="isLogin" v-link="{path:'/admin'}">
               <Icon type="ios-book"></Icon>
               管理员
             </Menu-item>
@@ -59,11 +59,11 @@
         <i-col span="24">
           <div class="main-view">
             <Row>
-              <i-col span="4">space</i-col>
+              <i-col span="4"><div><br></div></i-col>
               <i-col span="16">
                 <router-view></router-view>
               </i-col>
-              <i-col span="4">space</i-col>
+              <i-col span="4"><div><br></div></i-col>
             </Row>
 
           </div>
