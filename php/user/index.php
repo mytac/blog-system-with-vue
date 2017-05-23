@@ -115,7 +115,7 @@ function followArticle($userId,$writerId,$writerName){
 //main
 switch($d['chose']){
     case "isLogin": $back=isLogin($d['username'],$d['psd']);break;
-    case "regist":$back=fetchRegistData($d);break;
+    case "regist":$back=fetchRegistData($d['userBean']);break;
     case "goodWriters":$back=getGoodWriters();break;
     case "goodArticle":$back=goodArticle();break;
     case "showNotification":$back=showNotification($d['userId']);break;
