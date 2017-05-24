@@ -12,29 +12,29 @@
       <Form-item label="密码" prop="psd">
         <i-input :value.sync="formValidate.psd" placeholder="请输入密码"></i-input>
       </Form-item>
-      <Form-item label="昵称" prop="nicName">
-        <i-input :value.sync="formValidate.nicName" placeholder="请输入昵称"></i-input>
+      <Form-item label="昵称" prop="nickName">
+        <i-input :value.sync="formValidate.nickName" placeholder="请输入昵称"></i-input>
       </Form-item>
       <Form-item label="邮箱" prop="mail">
         <i-input :value.sync="formValidate.mail" placeholder="请输入邮箱"></i-input>
       </Form-item>
       <Form-item label="城市" prop="place">
-        <i-input :value.sync="formValidate.mail" placeholder="请输入常住地"></i-input>
+        <i-input :value.sync="formValidate.place" placeholder="请输入常住地"></i-input>
       </Form-item>
 
-      <Form-item label="选择日期">
+      <Form-item label="生日">
         <Row>
           <i-col span="11">
             <Form-item prop="birth">
-              <Date-picker type="date" placeholder="选择日期" :value.sync="formValidate.birth"></Date-picker>
+              <i-input type="text" placeholder="选择日期" :value.sync="formValidate.birth"></i-input>
             </Form-item>
           </i-col>
         </Row>
       </Form-item>
       <Form-item label="性别" prop="gender">
         <Radio-group :model.sync="formValidate.sex">
-          <Radio value="male">男</Radio>
-          <Radio value="female">女</Radio>
+          <Radio value="1">男</Radio>
+          <Radio value="2">女</Radio>
         </Radio-group>
       </Form-item>
       <Form-item>
@@ -74,11 +74,11 @@
           place: [
             {required: true, message: '请选择城市', trigger: 'change'}
           ],
-          gender: [
+          sex: [
             {required: true, message: '请选择性别', trigger: 'change'}
           ],
           birth: [
-            {required: true, type: 'date', message: '请选择日期', trigger: 'change'}
+            {required: true,  message: '请选择日期', trigger: 'change'}
           ]
         }
       }
@@ -88,8 +88,6 @@
           const _self=this
         this.$refs[name].validate((valid) => {
           if (valid) {
-              console.log(_self.formValidate)
-              // ajax here
             $.ajax({
               type:'get',
               url:'http://localhost:3000/user/index.php',

@@ -70,13 +70,17 @@ function fetchRegistData($d){
     $city=$d['city'];
     $birth=$d['birth'];
     $sex=$d['sex'];
-
-    $sql="INSERT INTO userlog vALUES(NULL,'$username','$psd','$nickname')";
-    if(queryBasic($sql,2,'')){
+    $sql="INSERT INTO `userlog` (`id`, `username`, `psd`, `nickname`, `type`) VALUES (NULL, '$username', '$psd', '$nickname', '0')";
+    insertError($sql);
+    $sql="SELECT id FROM userlog WHERE username='$username'";
+    $res=queryBasic($sql,0,'');
+    $sql="INSERT INTO userinfo VALUES($res[0],'$nickname','$email',$sex,'$city','$birth',0,0,0)";
+    return insertError($sql);
+    /*if(insertError($sql)['status']==1){
         $sql="SELECT id FROM userlog WHERE username='$username'";
-        $res=queryBasic($sql,0,'');
+        $res=queryError($sql,0,'');
         if($res&&$res[0]){
-            $sql="INSERT INTO userinfo VALUES($res[0],'$nickname','$email','$city','$birth',$sex)";
+            $sql="INSERT INTO userinfo VALUES('$res[0]','$nickname','$email','$city',$sex,'$birth',0,0,0)";
             if(queryBasic($sql,2,'')){
                 return array('status'=>1);
             }
@@ -84,7 +88,7 @@ function fetchRegistData($d){
     }
         $msg=mysqli_error($conn);
         $error=array('status'=>0,'msg'=>$msg);
-        return $error;
+        return $error;*/
     }
 //推荐作者
 function getGoodWriters(){
