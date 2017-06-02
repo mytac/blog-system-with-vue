@@ -44,6 +44,10 @@
   <div class="switch">
     <Switch :disabled="switchClose" @on-change="openComment" ></Switch>展开评论
   </div>
+  <div class="do-comment">
+    <i-input type="textarea" placeholder="请输入..." :value.sync="aComment"></i-input>
+    <i-button type="primary" @click="doComment">评论</i-button>
+  </div>
   <div class="comments" v-if="showComment">
     <comment :comments="comments"></comment>
   </div>
@@ -58,7 +62,8 @@ import comment from './comment.vue'
       return ({
         article: {},
         showComment:false,switchClose:false,
-        comments:[]
+        comments:[],
+        aComment:''//输入的一条评论
       })
     },
     methods: {
@@ -95,6 +100,21 @@ import comment from './comment.vue'
             _self.showComment=!_self.showComment
           }
         });
+      },
+      doComment(){ //进行评论
+          const _self=this
+        $.ajax({
+          type: 'get',
+          url: 'http://localhost:3000/user/detail.php',
+          dataType: 'json',
+          data: 'data=' + JSON.stringify({chose: 'doComment', username:_self.$route.params.username,comment:_self.aComment}),
+          success: function (data) {
+            if (data.status == 1) {
+              _self.$Message.success('评论成功');
+              window.location.reload()
+            }else { _self.$Message.error('评论失败');}
+          }
+        })
       }
     },
     components:{

@@ -9,6 +9,7 @@ import 'iview/dist/styles/iview.css';
 
 import signin from './components/sign/signin'
 import signup from './components/sign/signup'
+import profile from './components/profile/profile'
 import index from './components/index/index'
 import attention from './components/attention/attention.vue'
 import edit from './components/edit/edit.vue'
@@ -16,8 +17,6 @@ import articles from './components/articles/articles.vue'
 import detail from './components/articles/detail.vue'
 
 import mainview from'./components/attention/mainview.vue'
-import atten_hot from './components/attention/sub_hot.vue'
-import atten_new from './components/attention/sub_new.vue'
 
 import blogs from './components/index/recommendBlog.vue'
 import admin from './components/admin/main.vue'
@@ -48,10 +47,14 @@ router.map({
     component: index
   },
   '/signin': {
+    name:'signin',
     component: signin
   },
   '/signup': {
     component: signup
+  },
+  '/profile/:userId/:luId':{
+    component:profile
   },
   '/attention':{
     component:attention,

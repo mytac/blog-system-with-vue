@@ -55,7 +55,7 @@
           mail: '',
           place: '',
           sex: '',
-          birth: '',
+          birth: ''
         },
         ruleValidate: {
           username: [
@@ -86,7 +86,7 @@
     methods: {
       handleSubmit (name) {
           const _self=this
-        this.$refs[name].validate((valid) => {
+        this.$refs[name].validate(function(valid) {
           if (valid) {
             $.ajax({
               type:'get',
@@ -97,9 +97,10 @@
                 console.log(data)
               }
             })
-            this.$Message.success('提交成功!');
+            _self.$Message.success('提交成功!请先登录');
+            _self.$router.go('signin')
           } else {
-            this.$Message.error('表单验证失败!');
+            _self.$Message.error('表单验证失败!');
           }
         })
       },

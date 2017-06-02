@@ -139,9 +139,6 @@
 
 </template>
 <script type="text/ecmascript-6">
-  /*  const Vue=require('vue')
-   const VueRouter =require('vue-router')
-   Vue.use (VueRouter)*/
   import hotWriters from '../index/hotWriters.vue'
   export default{
     data(){
@@ -157,11 +154,11 @@
     },
     methods: {
       goDetail(id){
-        let userid = this.$route.params.userId
+        const userid = this.$route.params.userId
         this.$router.go({name: 'detail', params: {userId: userid, articleId: id}})
       },
       edit(id){
-        let userid = this.$route.params.userId
+        const userid = this.$route.params.userId
         this.$router.go({name: 'edit', params: {userId: userid, textId: id}})
       },
       remove(id){
@@ -199,41 +196,6 @@
             }
           }
         })
-        //ajax here...
-        //articles/queryByCategory (cid='')
-        let mockData = [
-          {
-            textId: 1,
-            title: '外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',
-            shortCut: '中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。',
-            likeNum: 20
-          },
-          {
-            textId: 1,
-            title: '外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',
-            shortCut: '中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。',
-            likeNum: 20
-          },
-          {
-            textId: 1,
-            title: '外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',
-            shortCut: '中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。',
-            likeNum: 20
-          },
-          {
-            textId: 1,
-            title: '外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',
-            shortCut: '中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。',
-            likeNum: 20
-          },
-          {
-            textId: 1,
-            title: '外媒：英国脱欧需赔偿500亿英镑 不赔钱就法庭见',
-            shortCut: '中国台湾网3月22日讯　据英国媒体报道，荷兰《人民报》取得欧盟内部拟定的英国脱欧计划草案。根据草案，英国若拒付500亿英镑的“分手费”，欧盟将会把英国告上海牙国际法庭，并不惜长期打官司，要回这笔欧盟认为英国加入欧盟43年积欠的债务。英国首相特雷莎·梅曾扬言，如果脱欧谈判太艰困，宁可没有协议，也要脱欧。一些英国保守党国会议员认为，欧盟若坚持英国付巨额“分手费”，英国干脆一走了之。',
-            likeNum: 20
-          }
-        ]
-        //this.articles = mockData
       },
       queryByCategory(cid){
         //ajax here...
@@ -274,12 +236,23 @@
       }
     },
     ready(){
-      let userId = this.$route.params.userId
-      this.userId=userId
-      if (userId) {
+        const _self=this
+      this.userId = this.$route.params.userId
+      if (this.userId) {
         this.$dispatch('userId', userId)
       }
       //ajax here
+      $.ajax({
+        type:'get',
+        url:'http://localhost:3000/user/detail.php',
+        dataType:'json',
+        data:'data='+JSON.stringify({chose:'showCategory',username:_self.username}),
+        success:function(data){
+         if(data.status==1){
+             _self.categories=data.categoriesBean
+         }
+        }
+      });
       //article/showCategoryList
       this.queryAll(userId)
       let categories = [
