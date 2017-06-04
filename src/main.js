@@ -56,7 +56,7 @@ router.map({
   '/profile/:userId/:luId':{
     component:profile
   },
-  '/attention':{
+  '/attention/:userId':{
     component:attention,
     subRoutes:{
       '/':{

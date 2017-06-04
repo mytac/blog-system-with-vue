@@ -85,6 +85,9 @@ td.title{
         },
         components: {
             'main-view': mainview
+        },
+        ready(){
+
         }
     }
 </script>

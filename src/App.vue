@@ -36,7 +36,7 @@
               <Icon type="pinpoint"></Icon>
               发现
             </Menu-item>
-            <Menu-item key="3" v-link="{ path: '/attention/1/2' }" v-if="isLogin">
+            <Menu-item key="3" @click="goto('attention',['userId','switchname'])" v-if="isLogin">
               <Icon type="pinpoint"></Icon>
               关注
             </Menu-item>
@@ -81,7 +81,8 @@
         /*status*/
         isLogin: false,
         showLoader: true,
-        userId:''
+        userId:'',
+        switchname:'1'
       }
     },
     methods:{

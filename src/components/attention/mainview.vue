@@ -10,9 +10,6 @@
             <div class="logo"></div>
             <!--<div class="content">{{$route.params.switchname}}</div>-->
            <!-- <div class="content">{{columnId}}</div>-->
-            <div class="buttons" @click="test($route.params)">
-              {{$route.params.switchname}}
-            </div>
         </div>
         <div class="blog">
             <div class="routers">
