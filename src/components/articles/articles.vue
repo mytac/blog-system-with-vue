@@ -238,15 +238,16 @@
     ready(){
         const _self=this
       this.userId = this.$route.params.userId
+      console.log('this.userId',this.userId)
       if (this.userId) {
-        this.$dispatch('userId', userId)
+        this.$dispatch('userId', this.userId)
       }
       //ajax here
       $.ajax({
         type:'get',
         url:'http://localhost:3000/user/detail.php',
         dataType:'json',
-        data:'data='+JSON.stringify({chose:'showCategory',username:_self.username}),
+        data:'data='+JSON.stringify({chose:'showCategory',username:_self.userId}),
         success:function(data){
          if(data.status==1){
              _self.categories=data.categoriesBean
@@ -254,7 +255,7 @@
         }
       });
       //article/showCategoryList
-      this.queryAll(userId)
+      this.queryAll(_self.userId)
       let categories = [
         {cid: 1, title: '分类1'},
         {cid: 1, title: '分类2'},

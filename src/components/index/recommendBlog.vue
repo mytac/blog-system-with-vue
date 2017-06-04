@@ -18,7 +18,7 @@
     border-radius: 16px;
     vertical-align: middle;
   }
-  .content{font-size: 13px;}
+  .content{font-size: 13px;height:95px;overflow:hidden}
   .cover{
     width: 150px;
     height:120px;

@@ -76,19 +76,6 @@ function fetchRegistData($d){
     $res=queryBasic($sql,0,'');
     $sql="INSERT INTO userinfo VALUES($res[0],'$nickname','$email',$sex,'$city','$birth',0,0,0)";
     return insertError($sql);
-    /*if(insertError($sql)['status']==1){
-        $sql="SELECT id FROM userlog WHERE username='$username'";
-        $res=queryError($sql,0,'');
-        if($res&&$res[0]){
-            $sql="INSERT INTO userinfo VALUES('$res[0]','$nickname','$email','$city',$sex,'$birth',0,0,0)";
-            if(queryBasic($sql,2,'')){
-                return array('status'=>1);
-            }
-        }
-    }
-        $msg=mysqli_error($conn);
-        $error=array('status'=>0,'msg'=>$msg);
-        return $error;*/
     }
 //推荐作者
 function getGoodWriters(){
