@@ -107,7 +107,7 @@
         </li>
       </ul>
       <div class="page">
-        <Page :total="100"></Page>
+        <Page :total="10"></Page>
       </div>
 
     </div>

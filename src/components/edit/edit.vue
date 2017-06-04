@@ -16,8 +16,16 @@
       </i-input>
     </div>
     <i-select :model.sync="choseCategory" style="width:200px">
-      <i-option v-for="c in categories" :value="c.id">{{c.text}}</i-option>
+      <i-option v-for="c in categories" :value="c.id">{{c.title}}</i-option>
+      <a @click="modal1=true">增加分类</a>
     </i-select>
+    <Modal
+            :visible.sync="modal1"
+            title="创建新分类"
+            @on-ok="createNewCategory"
+           >
+      <i-input placeholder="请输入新分类的名称" :value.sync="newCategoryName"></i-input>
+    </Modal>
     <i-button type="primary" @click="save">保存并上传</i-button>
 
     <div class="md-editor">
@@ -36,14 +44,17 @@
       return (
         {
           editItem: {},
-          content: '', choseCategory: 'sdad', categories: {},
+          content: '', choseCategory: 'sdad', categories: [],
           configs: {
             spellChecker: false // 禁用拼写检查
           },
+          modal1:false,
+          newCategoryName:'',
           timeOut: 0,
           title: '',
           temp: '',
-          selfSave: false  //用户主动保存的标识符
+          selfSave: false,  //用户主动保存的标识符,
+          userId:''
         }
       )
     },
@@ -61,16 +72,42 @@
       }
     },
     methods: {
+      createNewCategory(){
+          const categoryName=this.newCategoryName
+        const _self=this
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/edit.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'addCategory',title:categoryName,userId:_self.userId }),
+          success:function(data){
+            if(data.status==1){
+              _self.$Message.success('创建成果')
+            }else{
+              _self.$Message.error('保存失败，请重新登录后再试')
+            }
+          }
+
+        });
+      },
       fetchCategories(userId){
-        //ajax here
-        //edit/fetchCategoryList
-        let categories = [
-          {id: 12, text: '分类一'},
-          {id: 13, text: '分类2'},
-          {id: 14, text: '分类3'},
-          {id: 15, text: '分类4'}
-        ]
-        this.categories = categories
+        const _self=this
+        $.ajax({
+          type:'get',
+          url:'http://localhost:3000/user/edit.php',
+          dataType:'json',
+          data:'data='+JSON.stringify({chose:'getArticleCategory',userId:userId}),
+          success:function(data){
+            if(data.status==1){
+             data.category.forEach((a)=>{
+                  a.title=a.title.split('=!end!=')[1]
+              })
+              _self.categories=data.category
+            }else{
+              _self.$Message.error('请求失败，请重新登录系统')
+            }
+          }
+        })
       },
       autoSave(content){ //localstorage
         localStorage.setItem("content", content)
@@ -109,11 +146,11 @@
       }
     },
     ready(){
-      let userId = this.$route.params.userId
-      if (userId) {
-        this.$dispatch('userId', userId)
+      this.userId = this.$route.params.userId
+      if (this.userId) {
+        this.$dispatch('userId',this. userId)
       }
-      this.fetchCategories(userId)
+      this.fetchCategories(this.userId)
 
       //edit
       if (this.$route.name == 'edit') {

@@ -85,6 +85,7 @@ function addCategory($d){
     $sql="INSERT INTO category VALUES (NULL,'$userId=!end!=$title','$userId')";
     return insertError($sql,2);
 }
+
 //获取用户的文章分类
 function getArticleCategory($d){
     $userId=$d['userId'];

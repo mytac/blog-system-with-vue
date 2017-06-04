@@ -72,10 +72,16 @@ function showArticleList($writerId,$type){
     }
     return queryError($sql,99,'body');
 }
+// 获取关注作者列表
+function getWriterList($userId){
+    $sql="SELECT writerId,writername WHERE username=$userId";
+    return queryError($sql,100,'body');
+}
 //main
 switch($d['chose']){
     case "showWriterList":$back=showWriterList($d['userId']);break;
     case "showArticleList":$back=showArticleList($d['writerId'],$d['type']);break;
+    case "getWriterList":$back=getWriterList($d['userId']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back
