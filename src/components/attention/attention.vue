@@ -34,20 +34,15 @@ td.title{
             <i-col span="6">
                 <Menu :theme="light" width="auto">
                     <Menu-group title="关注内容">
-                        <Menu-item :key="$index+1" v-for="m in menu"
-                                   @click="changeColumn($index)"
-                                   v-link="{name:'attention',params:{switchname:switchname}}">
+                        <Menu-item :key="$index+1" v-for="m in writerList"
+                                   @click="changeColumn(m.id)">
                           <!--上面那行对应的是关注的人的id-->
                             <div class="menu">
                                 <div class="img-wrapper">
                                     <table>
                                         <tr>
-                                            <td class="img"><img :src="m.imgUrl" class="attention-avatar"></td>
+                                            <td class="img"><img src="./orange.png" class="attention-avatar"></td>
                                             <td class="title"><span>{{m.title}}</span></td>
-                                            <td class="active-num">
-                                                <!--关注的人的动态数-->
-                                                <span>{{m.activeNum}}</span>
-                                            </td>
                                         </tr>
                                     </table>
 
@@ -58,7 +53,7 @@ td.title{
                 </Menu>
             </i-col>
             <i-col span="18">
-                <router-view></router-view>
+              <main-view :writerid.sync="writerid"></main-view>
             </i-col>
         </Row>
     </div>
@@ -69,25 +64,35 @@ td.title{
     export default{
         data () {
             return {
-                menu: [
-                    {imgUrl: require('./orange.png'), title: '韩寒0', activeNum: '3', id: 1},
-                    {imgUrl: require('./orange.png'), title: '韩寒1', activeNum: '3', id: 3},
-                    {imgUrl: require('./orange.png'), title: '韩寒2', activeNum: '3', id: 6},
-                ],
                 ColumnId: 1,//专栏id,
-                switchname:''
+                switchname:'',
+                writerList:[],
+                writerid:''
             }
         },
         methods: {
-            changeColumn(index){
-                this.switchname=this.menu[index]['id']
+            changeColumn(id){
+               this.writerid=id
             }
         },
         components: {
             'main-view': mainview
         },
         ready(){
-
-        }
-    }
+          const userId=this.$route.params.userId
+          //ajax 查关注作者列表
+          $.ajax({
+            type:'get',
+            url:'http://localhost:3000/user/attention.php',
+            dataType:'json',
+            data:'data='+JSON.stringify({chose:'showWriterList',userId}),
+            success:function(data){
+              if(data.status==1){
+                _self.writerList = data.writerList
+              }else{
+                _self.$Message.error('请求失败，请重新登录系统')
+              }
+            }
+          })
+    }}
 </script>

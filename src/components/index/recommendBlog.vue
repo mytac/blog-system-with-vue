@@ -75,7 +75,7 @@
     export default{
         data(){
             return{
-              blogs:[]
+              test:''
             }
         },
       methods:{
@@ -86,10 +86,17 @@
       props:{
         userid:{
             type:String
+        },
+        blogs:{
+            type:Array
         }
       },
       ready(){
         const _self=this
+        // 当前路由是否为关注页
+        if(this.$route.path.indexOf('attention')>-1){
+            return;
+        }
         $.ajax({
           type:'get',
           url:'http://localhost:3000/user/index.php',

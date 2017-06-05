@@ -57,6 +57,10 @@ router.map({
     component:profile
   },
   '/attention/:userId':{
+    name:'attention',
+    component:attention
+  },
+/*  '/attention/:userId':{
     component:attention,
     subRoutes:{
       '/':{
@@ -71,21 +75,21 @@ router.map({
           }
         }
       },
-      '/:switchname':{
+      '/:switchname':{ //对应的关注作者名
         name:'attention',
         component:mainview,
         subRoutes:{
           '/':{
             component:blogs
           },
-          '/:choseType':{ //hot
+          '/:choseType':{ //排序类型，最新/最热
             name:'blogsType',
             component:blogs
           }
         }
       }
     }
-  },
+  },*/
   '/edit/:userId/:textId':{
       name:'edit',
       component:edit
