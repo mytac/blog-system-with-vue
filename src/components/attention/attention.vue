@@ -89,6 +89,7 @@ td.title{
             success:function(data){
               if(data.status==1){
                 _self.writerList = data.writerList
+                _self.writerid=data.writerList[0].writerid
               }else{
                 _self.$Message.error('请求失败，请重新登录系统')
               }
