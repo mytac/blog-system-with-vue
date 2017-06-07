@@ -42,7 +42,7 @@
         <div class="wrapper">
           <div class="writers" v-for="w in writers">
             <div class="avatar">
-              <img src="./hotWriters/orange.png">
+              <img src="./hotWriters/orange.png" @click="gotoProfile(w.id)">
             </div>
             <div class="content">
               <h4>{{w.nickname}}</h4>
@@ -82,7 +82,6 @@
         follow(id,nickname){
             const _self=this
           const userId=this.userid
-          console.log(userId)
           let statusCode=null //temp
           const alertMsg=[
               {status:'error',text:'服务器不想和你说话，并抛出一个异常'},
@@ -92,7 +91,6 @@
           if(this.islogin==false){
             statusCode=2
           }
-
           //ajax here..
           // return for **[statusCode]**
           $.ajax({
@@ -107,12 +105,15 @@
               eval(str)
             }
           });
-
-
+        },
+        gotoProfile(id){
+            const _self=this
+            this.router.go('profile',{userId:_self.userid,luId:id})
         }
       },
       ready(){
-          const _self=this
+        // 获取关注作者列表
+        const _self=this
         $.ajax({
           type:'get',
           url:'http://localhost:3000/user/index.php',
