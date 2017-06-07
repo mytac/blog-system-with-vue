@@ -49,18 +49,17 @@
     },
     methods:{
       noticeWindow(title,desc,type,duration){
-          if(!duration){duration=0} //duration==0时，通知栏不自动消失
+          if(!duration){duration=5} //duration==0时，通知栏不自动消失
         let str='this.$Notice.'+type+'({title: title,desc: desc,duration: duration});'
         eval(str)
       },
       showNoticeList(){
         this.isShowList=false
-        let _self=this
+        const _self=this
         const typeList=['open','success','error']
           this.noticeList.forEach(function(a){
               if(!isNaN(a.type)){
-                let typeCode=a.type
-                a.type=typeList[typeCode]
+                a.type=typeList[a.type]
               }
             _self.noticeWindow(a.title,a.desc,a.type,a.duration)
           })
@@ -70,6 +69,24 @@
           this.$Notice.destroy()
           this.isShowList=true
       }
+    },
+    ready(){
+        // ajax 通知列表
+      const _self=this
+      $.ajax({
+        type:'get',
+        url:'http://localhost:3000/user/index.php',
+        dataType:'json',
+        data:'data='+JSON.stringify({chose:'showNotification',userId:_self.$route.params.userId }),
+        success:function(data){
+            if(data.status=='1'){
+              _self.noticeList=data.notificationList
+
+            }else{
+              _self.$Message.error('通知列表获取失败')
+            }
+        }
+      });
     }
   }
 </script>
