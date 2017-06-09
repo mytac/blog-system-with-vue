@@ -58,7 +58,7 @@ function queryError($sql,$type,$bean){
 
 //显示通知
 function showWriterList($userId){
-    $sql="SELECT * FROM attention WHERE userId=$userId";
+    $sql="SELECT * FROM attention WHERE username='$userId'";
     return queryError($sql,99,'body');
 }
 

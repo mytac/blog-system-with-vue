@@ -107,8 +107,9 @@
           });
         },
         gotoProfile(id){
+            console.log(id)
             const _self=this
-            this.router.go('profile',{userId:_self.userid,luId:id})
+            this.$router.go('profile',{userId:_self.userid,luId:id})
         }
       },
       ready(){

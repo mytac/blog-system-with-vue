@@ -16,13 +16,13 @@
                 <div class="switcher">
                   <Menu mode="horizontal" :theme="theme1" active-key="1" >
                     <!--<Menu-item key="1" v-link="{name:'blogsType',params:{choseType:1}}">-->
-                    <Menu-item key="1">
-                      <Icon type="wand" @click="queryBlogList(0)"></Icon>
+                    <Menu-item key="1" @click="queryBlogList(0)">
+                      <Icon type="wand" ></Icon>
                       最新
                     </Menu-item>
                     <!--<Menu-item key="2" v-link="{name:'blogsType',params:{choseType:2}}">-->
-                    <Menu-item key="2" >
-                      <Icon type="fireball" @click="queryBlogList(1)"></Icon>
+                    <Menu-item key="2"  @click="queryBlogList(1)">
+                      <Icon type="fireball"></Icon>
                       热门
                     </Menu-item>
                   </Menu>
@@ -58,7 +58,7 @@
             data:'data='+JSON.stringify({chose:'showArticleList',writerId:_self.writerid,type}),
             success:function(data){
               if(data.status==1){
-                _self.blogs = data.articleList
+                _self.blogs = data.body
               }else{
                 _self.$Message.error('请求失败，请重新登录系统')
               }

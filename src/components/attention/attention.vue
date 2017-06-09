@@ -35,14 +35,14 @@ td.title{
                 <Menu :theme="light" width="auto">
                     <Menu-group title="关注内容">
                         <Menu-item :key="$index+1" v-for="m in writerList"
-                                   @click="changeColumn(m.id)">
+                                   @click="changeColumn(m.writerId)">
                           <!--上面那行对应的是关注的人的id-->
                             <div class="menu">
                                 <div class="img-wrapper">
                                     <table>
                                         <tr>
                                             <td class="img"><img src="./orange.png" class="attention-avatar"></td>
-                                            <td class="title"><span>{{m.title}}</span></td>
+                                            <td class="title"><span>{{m.writername}}</span></td>
                                         </tr>
                                     </table>
 
@@ -80,16 +80,20 @@ td.title{
         },
         ready(){
           const userId=this.$route.params.userId
-          //ajax 查关注作者列表
-          $.ajax({
+            const _self=this
+            if (this.$route.params.userId) {
+                this.$dispatch('userId',this. $route.params.userId)
+            }
+            //ajax 查关注作者列表
+            $.ajax({
             type:'get',
             url:'http://localhost:3000/user/attention.php',
             dataType:'json',
             data:'data='+JSON.stringify({chose:'showWriterList',userId}),
             success:function(data){
               if(data.status==1){
-                _self.writerList = data.writerList
-                _self.writerid=data.writerList[0].writerid
+                _self.writerList = data.body
+                _self.writerid=data.body[0].writerId
               }else{
                 _self.$Message.error('请求失败，请重新登录系统')
               }
