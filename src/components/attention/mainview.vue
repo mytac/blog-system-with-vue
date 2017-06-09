@@ -50,12 +50,14 @@
             console.log(params)
           },
         queryBlogList(type){
+              console.log(233)
           const _self=this
           $.ajax({
             type:'get',
             url:'http://localhost:3000/user/attention.php',
             dataType:'json',
             data:'data='+JSON.stringify({chose:'showArticleList',writerId:_self.writerid,type}),
+              async:false,
             success:function(data){
               if(data.status==1){
                 _self.blogs = data.body
@@ -69,7 +71,9 @@
       props:{
         writerid:{
             type:String,
-            twoWay:true
+            default:'111',
+            twoWay:true,
+            required:true
         }
       },
       components:{
@@ -78,8 +82,9 @@
         ready(){
           const _self=this
           const {userId}=this.$route.params
-          this.queryBlogList(0)
-
+            setTimeout(()=>{
+                _self.queryBlogList(0)
+            },300)
         },
 
     }
