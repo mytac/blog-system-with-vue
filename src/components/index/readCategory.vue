@@ -38,12 +38,7 @@
   export default{
     data(){
       return {
-        noticeList:[
-        {title:'1',desc:'111111',type:0},
-        {title:'1',desc:'111111',type:0},
-        {title:'1',desc:'111111',type:1},
-        {title:'1',desc:'111111',type:2},
-      ],
+        noticeList:[],
         isShowList:true
       }
     },
@@ -80,8 +75,7 @@
         data:'data='+JSON.stringify({chose:'showNotification',userId:_self.$route.params.userId }),
         success:function(data){
             if(data.status=='1'){
-              _self.noticeList=data.notificationList
-
+              _self.noticeList=data.body
             }else{
               _self.$Message.error('通知列表获取失败')
             }

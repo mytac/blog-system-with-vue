@@ -89,7 +89,7 @@ function goodArticle(){
 }
 //显示通知
 function showNotification($userId){
-    $sql="SELECT * FROM notification WHERE userId=$userId";
+    $sql="SELECT * FROM notification WHERE userId='$userId'";
     return queryError($sql,99,'body');
 }
 //关注作者
