@@ -96,11 +96,16 @@ function showNotification($userId){
 function followArticle($userId,$writerId,$writerName){
     $sql="SELECT id FROM userlog WHERE username='$userId'";
     $id=queryError($sql,0,'body')['body'][0];
+    $sql="SELECT id FROM `attention` WHERE userid='$id'AND writerId='$writerId'";
+    $attentionId=queryError($sql,0,'body')['body'][0];
+    if(is_numeric($attentionId)==true){
+        return array('status'=>0,'msg'=>'已关注');
+    }
     if(is_string($id)===true){
         $sql="INSERT INTO `attention` (`id`, `userid`, `writerId`, `writername`) VALUES (NULL, '$id', '$writerId', '$writerName');";
         return insertError($sql);
     }
-    return array('status'=>0);
+    return array('status'=>0,'msg'=>'unknow');
 
 }
 //main

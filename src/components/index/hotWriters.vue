@@ -91,18 +91,16 @@
           if(this.islogin==false){
             statusCode=2
           }
-          //ajax here..
-          // return for **[statusCode]**
           $.ajax({
             type:'get',
             url:'http://localhost:3000/user/index.php',
             dataType:'json',
             data:'data='+JSON.stringify({chose:'followArticle',id:userId ,writerid:id,writername:nickname}),
             success:function(data){
-              console.log(data)
-              statusCode=data.status
-              let str="_self.$Message."+alertMsg[statusCode].status+"('"+alertMsg[statusCode].text+"')"
-              eval(str)
+                if(data.status==1){
+                    _self.$Message.success('关注成功')
+                }
+                else _self.$Message.error(data.msg)
             }
           });
         },
