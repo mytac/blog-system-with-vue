@@ -83,7 +83,7 @@
   }
 </style>
 <template>
-  <div class="main">
+  <div class="main" v-if="rerender">
     <div class="articles">
       <h2>文章列表</h2>
       <ul class="article-list">
@@ -146,7 +146,8 @@
         modal2: false, removeId: null,
         articles: [],
         categories: [],
-        userId:''
+        userId:'',
+        rerender:true
       })
     },
     components: {
@@ -177,7 +178,9 @@
           success:function(data){
             if(data.status==1){
                 _self.$Message.success('删除成功')
-            }else{
+                _self.modal2=false
+                window.location.reload()
+              }else{
                 _self.$Message.error('删除失败')
             }
           }
