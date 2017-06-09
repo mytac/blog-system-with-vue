@@ -48,7 +48,7 @@
               <Icon type="ios-book"></Icon>
               我的文章
             </Menu-item>
-            <Menu-item key="6" v-if="isLogin" v-link="{path:'/admin'}">
+            <Menu-item key="6" v-if="isLogin&&isAdmin" v-link="{path:'/admin'}">
               <Icon type="ios-book"></Icon>
               管理员
             </Menu-item>
@@ -82,7 +82,8 @@
         isLogin: false,
         showLoader: true,
         userId:'',
-        switchname:'1'
+        switchname:'1',
+        isAdmin:false
       }
     },
     methods:{
@@ -117,7 +118,9 @@
 
     },
     ready(){
-
+       if(this.$route.name=='admin'){
+           this.isAdmin=true
+       }
     }
 
   }
