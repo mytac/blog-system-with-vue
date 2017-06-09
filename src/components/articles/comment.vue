@@ -1,4 +1,15 @@
-<style></style>
+<style>
+    .avatar{
+    width:48px;
+    height: 48px;
+  }
+.avatar>img{
+  width:48px;
+  height: 48px;
+  border:2px solid #e3e8ee;
+  border-radius:24px;
+}
+</style>
 <template>
   <div v-if="!showComment">
     <h1>暂无评论</h1>
@@ -6,8 +17,8 @@
   <div class="comment" v-if="showComment">
     <div v-for="c in comments">
       <div>
-        <div class="author"><a  target="_blank" class="avatar"><img></a>
-          <div class="info"><a  target="_blank" class="name">{{c.userId}}</a> <!---->
+        <!--<div class="author"><a  target="_blank" class="avatar"><img></a>-->
+          <div class="info"><a  target="_blank" class="name">{{c.username}}</a> <!---->
             <div class="meta"><span>{{c.createTime}}</span></div>
           </div>
         </div>
@@ -18,8 +29,6 @@
       </div>
       <div class="sub-comment-list hide"><!----> <!----></div>
     </div>
-
-  </div>
 </template>
 <script type="text/ecmascript-6">
   export default{

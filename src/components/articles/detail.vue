@@ -107,7 +107,7 @@ import comment from './comment.vue'
           type: 'get',
           url: 'http://localhost:3000/user/detail.php',
           dataType: 'json',
-          data: 'data=' + JSON.stringify({chose: 'doComment', username:_self.$route.params.username,comment:_self.aComment}),
+          data: 'data=' + JSON.stringify({chose: 'doComment', articleId:_self.$route.params.articleId,username:_self.$route.params.userId,comment:_self.aComment}),
           success: function (data) {
             if (data.status == 1) {
               _self.$Message.success('评论成功');

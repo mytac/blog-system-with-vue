@@ -69,7 +69,7 @@ function showCommentList($articleId){
 //对文章进行评论
 function doComment($articleId,$userId,$content){
     //$sql="INSERT INTO comment VALUES (NULL,$articleId,$userId,'$content', CURRENT_TIMESTAMP)";
-    $sql="INSERT INTO `comment` (`id`, `articleId`, `userId`, `content`, `createTime`) VALUES (NULL,$articleId,$userId,'$content', CURRENT_TIMESTAMP)";
+    $sql="INSERT INTO `comment` (`id`, `articleId`, `userName`, `content`, `createTime`) VALUES (NULL,'$articleId','$userId','$content',CURRENT_TIMESTAMP)";
     return insertError($sql,2);
 }
 
@@ -77,7 +77,7 @@ function doComment($articleId,$userId,$content){
 switch($d['chose']){
     case "showArticle":$back=showArticle($d['articleId']);break;
     case "showCommentList":$back=showCommentList($d['articleId']);break;
-    case "doComment":$back=doComment($d['articleId'],$d['userId'],$d['content']);break;
+    case "doComment":$back=doComment($d['articleId'],$d['username'],$d['comment']);break;
     default: $back="in php there no set 'chose' property";break;
 }
 //ajax_back
